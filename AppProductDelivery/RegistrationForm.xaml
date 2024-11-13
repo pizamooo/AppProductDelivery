@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:AppProductDelivery"
         mc:Ignorable="d"
         Title="RegistrationForm" Height="450" Width="800" 
-		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="SingleBorderWindow">
+		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="SingleBorderWindow"
+		WindowStartupLocation="CenterScreen">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="287*"/>
@@ -21,7 +22,7 @@
 		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,0,0,2"></Border>
 		<Label Grid.Column="1" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" FontFamily="Rockwell Extra Bold" Height="80" Width="396"/>
 		<Image Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="100" Source="Images/3558114_car_delivery_fruit_sell_street_icon.png" StretchDirection="DownOnly" Stretch="Fill" MouseDown="Icon_MouseDown"/>
-		<TextBlock Name="Greeting" Grid.Row="1" Text="Добро пожаловать на наш сервис &quot;FamilyTech Solutions&quot;. Для продолжения введите ваш логин и пароль, если он у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;." TextWrapping="Wrap" FontFamily="Rockwell Extra Bold" FontSize="20" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="5,0,0,0" TextAlignment="Center">
+		<TextBlock Name="Greeting" Grid.Row="1" Text="Добро пожаловать на наш сервис &quot;FamilyTech Solutions&quot;. Для регистрации введите ваш логин и пароль. Если он у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;." TextWrapping="Wrap" FontFamily="Rockwell Extra Bold" FontSize="20" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="5,0,0,0" TextAlignment="Center">
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="0" ScaleY="0"></ScaleTransform>
 			</TextBlock.RenderTransform>
@@ -37,5 +38,26 @@
 				<ScaleTransform ScaleX="1" ScaleY="1"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
+		<Grid Grid.Row="1" Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<TextBox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLines="1" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
+			<Label Grid.Row="0" Content="Логин:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
+			<PasswordBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
+			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
+			<PasswordBox Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
+			<Label Grid.Row="2" Content="Повторите пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,275,0"/>
+			<TextBox Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" MaxLines="1" FontFamily="Rockwell Extra Bold"/>
+			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
+			<Button Content="Войти" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,220,20" Width="200" Height="30" FontSize="18"/>
+			<Button Content="Зарегистрироваться" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="220,0,0,20" Width="200" Height="30" FontSize="18"/>
+			<CheckBox HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,50,0" />
+			<Label Content="Посмотреть пароль" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="90,38,0,0" FontFamily="Rockwell Extra Bold"/>
+		</Grid>
 	</Grid>
 </Window>
