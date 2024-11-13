@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,18 +25,25 @@ namespace AppProductDelivery
         public RegistrationForm()
         {
             InitializeComponent();
+
+            AcceptTerm.Checked += AcceptTerm_Checked;
+            AcceptTerm.Unchecked += AcceptTerm_Checked;
+            Login.TextChanged += Login_TextChanged;
+            Email.TextChanged += Email_TextChanged;
+            RetryPasword.PasswordChanged += RetryPasword_PasswordChanged;
+            Password.PasswordChanged += Password_PasswordChanged;
         }
 
         private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Создание анимации для исчезновения уведомления
+            // Создание анимации для исчезновения приветственного текста
             var notificationAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.5));
             var notificationStoryboard = new Storyboard();
             notificationStoryboard.Children.Add(notificationAnimation);
             Storyboard.SetTarget(notificationAnimation, BeforeGreeting);
             Storyboard.SetTargetProperty(notificationAnimation, new PropertyPath(UIElement.OpacityProperty));
 
-            // Запуска анимации исчезновения уведомления
+            // Запуска анимации исчезновения приветственного текста
             notificationStoryboard.Completed += (s, args) =>
             {
                 // Создание анимации для появления текста и второй картинки
@@ -80,6 +89,48 @@ namespace AppProductDelivery
             };
 
             notificationStoryboard.Begin();
+        }
+
+        //Проверка для включения кнопки регистрации при условии, что чекбокс, пароль и логин введены
+        private void UpdateSignUpButtonState()
+        {
+            bool isUsernameFilled = !string.IsNullOrEmpty(Login.Text);
+            bool isEmailFilled = !string.IsNullOrEmpty(Email.Text);
+            bool isPasswordFilled = !string.IsNullOrEmpty(Password.Password);
+            bool isRetryPasswordFilled = !string.IsNullOrEmpty(RetryPasword.Password);
+            bool isTermsAccepted = AcceptTerm.IsChecked == true;
+
+            SignUp.IsEnabled = isUsernameFilled && isPasswordFilled && isTermsAccepted && isEmailFilled && isRetryPasswordFilled;
+        }
+
+        private void Login_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateSignUpButtonState();
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateSignUpButtonState();
+        }
+
+        private void AcceptTerm_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateSignUpButtonState();
+        }
+
+        private void Password_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateSignUpButtonState();
+        }
+        //Конвертация пароля в string для считывания кнопки
+        private void RetryPasword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            UpdateSignUpButtonState();
+        }
+
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            UpdateSignUpButtonState();
         }
     }
 }

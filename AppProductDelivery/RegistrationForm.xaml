@@ -8,6 +8,59 @@
         Title="RegistrationForm" Height="450" Width="800" 
 		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="SingleBorderWindow"
 		WindowStartupLocation="CenterScreen">
+	<Window.Resources>
+		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
+			<Setter Property="Background" Value="#cbe8ac"/>
+			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Padding" Value="5"/>
+			<Setter Property="FontFamily" Value="Rockwell Extra Bold"/>
+			<Setter Property="BorderBrush" Value="Black"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style TargetType="TextBox">
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="LimeGreen"/>
+					<Setter Property="Cursor" Value="Hand"></Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="PasswordBox">
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="LimeGreen"/>
+					<Setter Property="Cursor" Value="Hand"></Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="CheckBox">
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="LimeGreen"/>
+					<Setter Property="Cursor" Value="Hand"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button">
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="LimeGreen"/>
+					<Setter Property="Cursor" Value="Hand"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="287*"/>
@@ -22,7 +75,7 @@
 		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,0,0,2"></Border>
 		<Label Grid.Column="1" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" FontFamily="Rockwell Extra Bold" Height="80" Width="396"/>
 		<Image Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="100" Source="Images/3558114_car_delivery_fruit_sell_street_icon.png" StretchDirection="DownOnly" Stretch="Fill" MouseDown="Icon_MouseDown"/>
-		<TextBlock Name="Greeting" Grid.Row="1" Text="Добро пожаловать на наш сервис &quot;FamilyTech Solutions&quot;. Для регистрации введите ваш логин и пароль. Если он у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;." TextWrapping="Wrap" FontFamily="Rockwell Extra Bold" FontSize="20" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="5,0,0,0" TextAlignment="Center">
+		<TextBlock Name="Greeting" Grid.Row="1" Text="Добро пожаловать на наш сервис &quot;FamilyTech Solutions&quot;. Для регистрации введите ваш логин и пароль. Если он у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;." TextWrapping="Wrap" FontFamily="Rockwell Extra Bold" FontSize="20" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center">
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="0" ScaleY="0"></ScaleTransform>
 			</TextBlock.RenderTransform>
@@ -33,7 +86,7 @@
 			</Image.RenderTransform>
 		</Image>
 		<TextBlock Grid.Row="1" Name="BeforeGreeting" Text="Добро пожаловать! 
-				   Для подробной информации нажмите на картинку!" FontFamily="Rockwell Extra Bold" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="20" Padding="10,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch">
+				   Для подробной информации нажмите на картинку!" FontFamily="Rockwell Extra Bold" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="20" Padding="0,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch">
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="1" ScaleY="1"/>
 			</TextBlock.RenderTransform>
@@ -46,18 +99,42 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLines="1" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
-			<Label Grid.Row="0" Content="Логин:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
-			<PasswordBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
-			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
-			<PasswordBox Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" FontFamily="Rockwell Extra Bold"/>
-			<Label Grid.Row="2" Content="Повторите пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,275,0"/>
-			<TextBox Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,0" FontSize="20" MaxLength="30" MaxLines="1" FontFamily="Rockwell Extra Bold"/>
-			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,0"/>
-			<Button Content="Войти" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,220,20" Width="200" Height="30" FontSize="18"/>
-			<Button Content="Зарегистрироваться" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="220,0,0,20" Width="200" Height="30" FontSize="18"/>
-			<CheckBox HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,50,0" />
-			<Label Content="Посмотреть пароль" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="90,38,0,0" FontFamily="Rockwell Extra Bold"/>
+			<TextBox Name="Login" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLines="1" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Login_TextChanged">
+				<TextBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+					</ToolTip>
+				</TextBox.ToolTip>
+			</TextBox>
+			<Label Grid.Row="0" Content="Логин:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
+			<PasswordBox Name="Password" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="Password_PasswordChanged">
+				<PasswordBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						Введите пароль не более 30 символов
+					</ToolTip>
+				</PasswordBox.ToolTip>
+			</PasswordBox>
+			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
+			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="18" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
+				<PasswordBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						Повторите набранный выше пароль
+					</ToolTip>
+				</PasswordBox.ToolTip>
+			</PasswordBox>
+			<Label Grid.Row="2" Content="Повторите пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,275,12"/>
+			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
+				<TextBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+					</ToolTip>
+				</TextBox.ToolTip>
+			</TextBox>
+			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
+			<Button Name="LogIn" Content="Войти" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,220,20" Width="200" Height="30" FontSize="18"/>
+			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="220,0,0,20" Width="200" Height="30" FontSize="18" IsEnabled="False"/>
+			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"/>
+			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="30,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold"/>
 		</Grid>
 	</Grid>
 </Window>
