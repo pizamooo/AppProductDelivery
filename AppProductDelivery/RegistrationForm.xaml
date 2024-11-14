@@ -60,6 +60,11 @@
 				</Trigger>
 			</Style.Triggers>
 		</Style>
+		<Style TargetType="Image">
+			<Setter Property="Cursor" Value="Hand"></Setter>
+			<Style.Triggers>
+			</Style.Triggers>
+		</Style>
 	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -70,23 +75,25 @@
 			<RowDefinition Height="100*"/>
 			<RowDefinition Height="230*"/>
 		</Grid.RowDefinitions>
-		<Border Grid.Row="0" Background="#c6d4a5"></Border>
-		<Border Grid.Row="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,0,2,0"></Border>
-		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,0,0,2"></Border>
-		<Label Grid.Column="1" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="60" FontFamily="Rockwell Extra Bold" Height="80" Width="396"/>
-		<Image Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="100" Source="Images/3558114_car_delivery_fruit_sell_street_icon.png" StretchDirection="DownOnly" Stretch="Fill" MouseDown="Icon_MouseDown"/>
-		<TextBlock Name="Greeting" Grid.Row="1" Text="Добро пожаловать на наш сервис &quot;FamilyTech Solutions&quot;. Для регистрации введите ваш логин и пароль. Если он у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;." TextWrapping="Wrap" FontFamily="Rockwell Extra Bold" FontSize="20" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center">
+		<Border Grid.Row="0" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="3,3,3,3"></Border>
+		<Border Grid.Row="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="3,0,3,3"></Border>
+		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,3,3,3"></Border>
+		<Label Grid.Column="1" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64" FontFamily="Arial Black" Height="93" Width="468" Foreground="#105e57"/>
+		<Image Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Height="115" Width="130" Source="Images/heart_833472.png" StretchDirection="DownOnly" Stretch="Fill" MouseDown="Icon_MouseDown">
+			<Image.RenderTransform>
+				<ScaleTransform x:Name="ImageScaleTransform"/>
+			</Image.RenderTransform>
+		</Image>
+		<TextBlock Name="Greeting" Grid.Row="1" TextWrapping="Wrap" FontFamily="Arial Black" FontSize="22" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center" Foreground="#105e57" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+			<Run Text="Добро пожаловать на наш сервис"/>
+			<Run Text="&quot;FamilyTech Solutions&quot;." Foreground="#1b302c"/>
+			<Run Text="Для регистрации введите ваш логин, пароль и email. Если у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;."/>
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="0" ScaleY="0"></ScaleTransform>
 			</TextBlock.RenderTransform>
 		</TextBlock>
-		<Image Name="ImageGreeting" HorizontalAlignment="Center" Height="100" Margin="0,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Source="Images/11783431_handshake_agreement_deal_partnership_greeting_icon.png" Visibility="Collapsed" Opacity="0" RenderTransformOrigin="0.5,0.5">
-			<Image.RenderTransform>
-				<ScaleTransform ScaleX="0" ScaleY="0"></ScaleTransform>
-			</Image.RenderTransform>
-		</Image>
 		<TextBlock Grid.Row="1" Name="BeforeGreeting" Text="Добро пожаловать! 
-				   Для подробной информации нажмите на картинку!" FontFamily="Rockwell Extra Bold" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="20" Padding="0,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch">
+				   Для подробной информации нажмите на картинку сердца!" FontFamily="Arial Black" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="30" Padding="0,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="#105e57" VerticalAlignment="Center">
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="1" ScaleY="1"/>
 			</TextBlock.RenderTransform>
@@ -99,42 +106,50 @@
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBox Name="Login" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLines="1" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Login_TextChanged">
+			<Border Grid.RowSpan="5" Grid.Column="1" BorderBrush="#212e04" BorderThickness="0,0,3,3">
+			</Border>
+			<Image Grid.Row="0" Margin="40,2,400,2" Cursor="Arrow" Source="/Images/2203549_admin_avatar_human_login_user_icon.png"/>
+			<Image Grid.Row="1" Source="/Images/padlock-unlock.png" Cursor="Arrow" Margin="40,2,400,2"/>
+			<Image Grid.Row="2" Source="/Images/secured-lock.png" Cursor="Arrow" Margin="40,2,400,2"/>
+			<Image Grid.Row="3" Source="/Images/mail.png" Cursor="Arrow" Margin="40,2,400,2"/>
+			<TextBox Name="Login" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLines="1" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Login_TextChanged">
 				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
 					</ToolTip>
 				</TextBox.ToolTip>
 			</TextBox>
-			<Label Grid.Row="0" Content="Логин:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
-			<PasswordBox Name="Password" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="Password_PasswordChanged">
-				<PasswordBox.ToolTip>
+			<Label Content="Логин:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="161,0,0,0" Foreground="#105e57"/>
+			<TextBox Name="Password" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000"
+				TextChanged="Password_TextChanged">
+				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Введите пароль не более 30 символов
 					</ToolTip>
-				</PasswordBox.ToolTip>
-			</PasswordBox>
-			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
-			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="18" MaxLength="30" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
+				</TextBox.ToolTip>
+			</TextBox>
+			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="143,0,0,0" Foreground="#105e57"/>
+			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
 				<PasswordBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Повторите набранный выше пароль
 					</ToolTip>
 				</PasswordBox.ToolTip>
 			</PasswordBox>
-			<Label Grid.Row="2" Content="Повторите пароль:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,275,12"/>
-			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="135,0,0,10" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Rockwell Extra Bold" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
+			<Label Grid.Row="1" Content="Повторите" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="170" Margin="105,43,0,0" Grid.RowSpan="2"/>
+			<Label Grid.Row="2" Content="пароль:" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="126" Margin="149,0,0,0"/>
+			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
 				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
 					</ToolTip>
 				</TextBox.ToolTip>
 			</TextBox>
-			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Center"  FontFamily="Rockwell Extra Bold" FontSize="20" Margin="0,0,290,12"/>
-			<Button Name="LogIn" Content="Войти" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,220,20" Width="200" Height="30" FontSize="18"/>
-			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Rockwell Extra Bold" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="220,0,0,20" Width="200" Height="30" FontSize="18" IsEnabled="False"/>
+			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="173,0,0,0" Foreground="#105e57"/>
+			<Button Name="LogIn" Content="Войти" FontFamily="Arial Black" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18"/>
+			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False"/>
 			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"/>
-			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="30,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold"/>
+			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="30,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Foreground="#105e57"/>
 		</Grid>
 	</Grid>
 </Window>

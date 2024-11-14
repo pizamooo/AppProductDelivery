@@ -106,7 +106,19 @@
     <Resource Include="Images\3558114_car_delivery_fruit_sell_street_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\11783431_handshake_agreement_deal_partnership_greeting_icon.png" />
+    <Resource Include="Images\heart_833472.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\padlock-unlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\secured-lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\2203549_admin_avatar_human_login_user_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
