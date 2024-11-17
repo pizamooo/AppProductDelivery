@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -123,6 +124,16 @@ namespace AppProductDelivery
             // Применяем анимацию к изображению
             ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

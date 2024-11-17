@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AppProductDelivery"
         mc:Ignorable="d"
         Title="RegistrationForm" Height="450" Width="800" 
-		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="SingleBorderWindow"
+		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="None"
 		WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
@@ -20,37 +20,7 @@
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
 		</Style>
-		<Style TargetType="TextBox">
-			<Setter Property="BorderBrush" Value="Green"/>
-			<Setter Property="BorderThickness" Value="2"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="BorderBrush" Value="LimeGreen"/>
-					<Setter Property="Cursor" Value="Hand"></Setter>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style TargetType="PasswordBox">
-			<Setter Property="BorderBrush" Value="Green"/>
-			<Setter Property="BorderThickness" Value="2"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="BorderBrush" Value="LimeGreen"/>
-					<Setter Property="Cursor" Value="Hand"></Setter>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
 		<Style TargetType="CheckBox">
-			<Setter Property="BorderBrush" Value="Green"/>
-			<Setter Property="BorderThickness" Value="2"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="BorderBrush" Value="LimeGreen"/>
-					<Setter Property="Cursor" Value="Hand"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style TargetType="Button">
 			<Setter Property="BorderBrush" Value="Green"/>
 			<Setter Property="BorderThickness" Value="2"/>
 			<Style.Triggers>
@@ -75,16 +45,68 @@
 			<RowDefinition Height="100*"/>
 			<RowDefinition Height="230*"/>
 		</Grid.RowDefinitions>
-		<Border Grid.Row="0" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="3,3,3,3"></Border>
+		<Border Grid.Row="0" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="3,3,3,3">
+		</Border>
 		<Border Grid.Row="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="3,0,3,3"></Border>
-		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,3,3,3"></Border>
+		<Border Grid.Column="1" Background="#c6d4a5" BorderBrush="#212e04" BorderThickness="0,3,3,3">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+				<Button Content="-" FontWeight="Bold" FontSize="16" Width="25" Click="MinimizeButton_Click" FontFamily="Arial Black" Grid.Column="1" Cursor="Hand">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Setter Property="Background" Value="#bcdde3"/>
+							<Setter Property="BorderBrush" Value="#212e04"/>
+							<Setter Property="BorderThickness" Value="1.5,0,0,1.5"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type Button}">
+										<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+											<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="Aqua"/>
+									<Setter Property="Foreground" Value="White"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+				<Button Content="x" FontWeight="Bold" FontSize="16" Width="25" Click="CloseButton_Click" FontFamily="Arial Black" Grid.Column="1" Cursor="Hand">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Setter Property="Background" Value="#e08484"/>
+							<Setter Property="BorderBrush" Value="#212e04"/>
+							<Setter Property="BorderThickness" Value="1.5,0,0,1.5"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+											<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="Red"/>
+									<Setter Property="Foreground" Value="White"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</StackPanel>
+		</Border>
 		<Label Grid.Column="1" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64" FontFamily="Arial Black" Height="93" Width="468" Foreground="#105e57"/>
 		<Image Name="Icon" VerticalAlignment="Center" HorizontalAlignment="Center" Height="115" Width="130" Source="Images/heart_833472.png" StretchDirection="DownOnly" Stretch="Fill" MouseDown="Icon_MouseDown">
 			<Image.RenderTransform>
 				<ScaleTransform x:Name="ImageScaleTransform"/>
 			</Image.RenderTransform>
 		</Image>
-		<TextBlock Name="Greeting" Grid.Row="1" TextWrapping="Wrap" FontFamily="Arial Black" FontSize="22" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center" Foreground="#105e57" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+		<TextBlock Name="Greeting" Grid.Row="1" TextWrapping="Wrap" FontFamily="Arial Black" FontSize="21" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center" Foreground="#105e57" VerticalAlignment="Center" HorizontalAlignment="Stretch">
 			<Run Text="Добро пожаловать на наш сервис"/>
 			<Run Text="&quot;FamilyTech Solutions&quot;." Foreground="#1b302c"/>
 			<Run Text="Для регистрации введите ваш логин, пароль и email. Если у вас уже есть, то для продолжения нажмите кнопку &quot;Войти&quot;."/>
@@ -118,6 +140,39 @@
 						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
 					</ToolTip>
 				</TextBox.ToolTip>
+				<TextBox.Style>
+					<Style TargetType="TextBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="Text" Value="">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"></Setter>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</TextBox.Style>
 			</TextBox>
 			<Label Content="Логин:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="161,0,0,0" Foreground="#105e57"/>
 			<TextBox Name="Password" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000"
@@ -127,16 +182,78 @@
 						Введите пароль не более 30 символов
 					</ToolTip>
 				</TextBox.ToolTip>
+				<TextBox.Style>
+					<Style TargetType="TextBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="Text" Value="">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"></Setter>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</TextBox.Style>
 			</TextBox>
 			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="143,0,0,0" Foreground="#105e57"/>
 			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
 				<PasswordBox.ToolTip>
-					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+					<ToolTip Style="{StaticResource CustomToolTipStyle}" >
 						Повторите набранный выше пароль
 					</ToolTip>
 				</PasswordBox.ToolTip>
+				<PasswordBox.Style>
+					<Style TargetType="PasswordBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type PasswordBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"/>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</PasswordBox.Style>
 			</PasswordBox>
-			<Label Grid.Row="1" Content="Повторите" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="170" Margin="105,43,0,0" Grid.RowSpan="2"/>
+			<Label Grid.Row="1" Content="Повторите" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="170" Margin="105,53,0,0" Grid.RowSpan="2"/>
 			<Label Grid.Row="2" Content="пароль:" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="126" Margin="149,0,0,0"/>
 			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
 				<TextBox.ToolTip>
@@ -144,11 +261,96 @@
 						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
 					</ToolTip>
 				</TextBox.ToolTip>
+				<TextBox.Style>
+					<Style TargetType="TextBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="Text" Value="">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"></Setter>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</TextBox.Style>
 			</TextBox>
 			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="173,0,0,0" Foreground="#105e57"/>
-			<Button Name="LogIn" Content="Войти" FontFamily="Arial Black" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18"/>
-			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" Background="#9ae3ae" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False"/>
-			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"/>
+			<Button Name="LogIn" Content="Войти" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18" Cursor="Hand">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Background" Value="#9ae3ae"></Setter>
+						<Setter Property="Foreground" Value="Black"></Setter>
+						<Setter Property="BorderBrush" Value="Black"></Setter>
+						<Setter Property="BorderThickness" Value="1"></Setter>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="#68de99"></Setter>
+								<Setter Property="Foreground" Value="#0f5930"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False" Cursor="Hand">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Background" Value="#9ae3ae"></Setter>
+						<Setter Property="Foreground" Value="Black"></Setter>
+						<Setter Property="BorderBrush" Value="Black"></Setter>
+						<Setter Property="BorderThickness" Value="1"></Setter>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="#68de99"></Setter>
+								<Setter Property="Foreground" Value="#0f5930"></Setter>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Background" Value="#879c90"></Setter>
+								<Setter Property="Foreground" Value="#48524c"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"></CheckBox>
 			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="30,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Foreground="#105e57"/>
 		</Grid>
 	</Grid>
