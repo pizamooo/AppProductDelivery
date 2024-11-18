@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -26,12 +27,7 @@ namespace AppProductDelivery
         {
             InitializeComponent();
 
-            AcceptTerm.Checked += AcceptTerm_Checked;
-            AcceptTerm.Unchecked += AcceptTerm_Checked;
-            Login.TextChanged += Login_TextChanged;
-            Email.TextChanged += Email_TextChanged;
-            RetryPasword.PasswordChanged += RetryPasword_PasswordChanged;
-            Password.PasswordChanged += Password_PasswordChanged;
+            StartAnimationInRegistrationForm();
         }
 
         private void Icon_MouseDown(object sender, MouseButtonEventArgs e)
@@ -67,25 +63,11 @@ namespace AppProductDelivery
                 Storyboard.SetTarget(textOpacityAnimation, Greeting);
                 Storyboard.SetTargetProperty(textOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
 
-                // Настраивании анимации для второй картинки
-                var imageStoryboard = new Storyboard();
-                imageStoryboard.Children.Add(imageScaleAnimationX);
-                imageStoryboard.Children.Add(imageScaleAnimationY);
-                imageStoryboard.Children.Add(imageOpacityAnimation);
-                Storyboard.SetTarget(imageScaleAnimationX, ImageGreeting);
-                Storyboard.SetTargetProperty(imageScaleAnimationX, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
-                Storyboard.SetTarget(imageScaleAnimationY, ImageGreeting);
-                Storyboard.SetTargetProperty(imageScaleAnimationY, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleY)"));
-                Storyboard.SetTarget(imageOpacityAnimation, ImageGreeting);
-                Storyboard.SetTargetProperty(imageOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-
                 // Текст и вторая картинка
                 Greeting.Visibility = Visibility.Visible;
-                ImageGreeting.Visibility = Visibility.Visible;
 
                 // Запуск анимации
                 textStoryboard.Begin();
-                imageStoryboard.Begin();
             };
 
             notificationStoryboard.Begin();
@@ -96,7 +78,7 @@ namespace AppProductDelivery
         {
             bool isUsernameFilled = !string.IsNullOrEmpty(Login.Text);
             bool isEmailFilled = !string.IsNullOrEmpty(Email.Text);
-            bool isPasswordFilled = !string.IsNullOrEmpty(Password.Password);
+            bool isPasswordFilled = !string.IsNullOrEmpty(Password.Text);
             bool isRetryPasswordFilled = !string.IsNullOrEmpty(RetryPasword.Password);
             bool isTermsAccepted = AcceptTerm.IsChecked == true;
 
@@ -128,9 +110,30 @@ namespace AppProductDelivery
             UpdateSignUpButtonState();
         }
 
-        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        private void StartAnimationInRegistrationForm()
         {
-            UpdateSignUpButtonState();
+            DoubleAnimation scaleAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 1.05,
+                Duration = new Duration(TimeSpan.FromSeconds(1)),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+
+            // Применяем анимацию к изображению
+            ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
+            ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
