@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -104,7 +106,7 @@ namespace AppProductDelivery
         {
             UpdateSignUpButtonState();
         }
-        //Конвертация пароля в string для считывания кнопки
+
         private void RetryPasword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             UpdateSignUpButtonState();
@@ -121,19 +123,138 @@ namespace AppProductDelivery
                 RepeatBehavior = RepeatBehavior.Forever
             };
 
-            // Применяем анимацию к изображению
+            // Принятие анимации к изображению
             ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            var animation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            animation.Completed += (s, args) => this.Hide();
+            this.BeginAnimation(UIElement.OpacityProperty, animation);
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var animation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            animation.Completed += (s, args) => this.Close();
+            this.BeginAnimation(UIElement.OpacityProperty, animation);
+        }
+        // Нажатие чекбокса просмотреть пароль
+        private void CheckPassword_Checked(object sender, RoutedEventArgs e)
+        {
+            PasswordRetrySneaky.Text = RetryPasword.Password;
+            RetryPasword.Visibility = Visibility.Collapsed;
+            PasswordRetrySneaky.Visibility = Visibility.Visible;
+        }
+
+        private void CheckPassword_Uncheked(object sender, RoutedEventArgs e)
+        {
+            RetryPasword.Password = PasswordRetrySneaky.Text;
+            PasswordRetrySneaky.Visibility = Visibility.Collapsed;
+            RetryPasword.Visibility = Visibility.Visible;
+        }
+        // проверка на наличие спец символов и соответствие пароля
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(Login.Text) || !IsValidLogin(Login.Text))
+            {
+                Login.Tag  = true;
+                isValid = false;
+            }
+            else
+            {
+                Login.Tag  = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password.Text))
+            {
+                Password.Tag = true;
+                isValid = false;
+            }
+            else
+            {
+                Password.Tag  = false;
+            }
+
+            if (RetryPasword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
+            {
+                RetryPasword.Tag  = true;
+                PasswordRetrySneaky.Tag = true;
+                isValid = false;
+            }
+            else
+            {
+                RetryPasword.Tag  = false;
+                PasswordRetrySneaky.Tag = false;
+            }
+
+            if (!IsValidEmail(Email.Text))
+            {
+                Email.Tag  = true;
+                isValid = false;
+            }
+            else
+            {
+                Email.Tag  = false;
+            }
+
+            if (isValid)
+            {
+                MessageBox.Show("Регистрация успешно пройдена!");
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста исправьте ошибки!.");
+            }
+        }
+        //Функции для проверки спец знаков
+        private bool IsValidLogin(string login)
+        {
+            string pattern = @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]";
+            return !Regex.IsMatch(login, pattern);
+        }
+
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                string specialCharPattern = @"[!#$%^&*()_+=\[{\]};:<>|/?,-]";
+                if (Regex.IsMatch(email, specialCharPattern))
+                    return false;
+
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                return Regex.IsMatch(email, emailPattern);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+        //Движение мышки
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

@@ -7,14 +7,15 @@
         mc:Ignorable="d"
         Title="RegistrationForm" Height="450" Width="800" 
 		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="None"
-		WindowStartupLocation="CenterScreen">
+		 AllowsTransparency="True"
+		WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown">
 	<Window.Resources>
 		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
 			<Setter Property="Background" Value="#cbe8ac"/>
 			<Setter Property="Foreground" Value="Black"/>
-			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="FontSize" Value="11"/>
 			<Setter Property="Padding" Value="5"/>
-			<Setter Property="FontFamily" Value="Rockwell Extra Bold"/>
+			<Setter Property="FontFamily" Value="Arial Black"/>
 			<Setter Property="BorderBrush" Value="Black"/>
 			<Setter Property="BorderThickness" Value="1"/>
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -115,7 +116,7 @@
 			</TextBlock.RenderTransform>
 		</TextBlock>
 		<TextBlock Grid.Row="1" Name="BeforeGreeting" Text="Добро пожаловать! 
-				   Для подробной информации нажмите на картинку сердца!" FontFamily="Arial Black" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="30" Padding="0,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="#105e57" VerticalAlignment="Center">
+				   Для подробной информации нажмите на сердце!" FontFamily="Arial Black" TextWrapping="Wrap" Visibility="Visible" Opacity="1" RenderTransformOrigin="0.5,0.5" FontSize="30" Padding="0,0,0,0" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="#105e57" VerticalAlignment="Center">
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="1" ScaleY="1"/>
 			</TextBlock.RenderTransform>
@@ -137,7 +138,9 @@
 			<TextBox Name="Login" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLines="1" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Login_TextChanged">
 				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
-						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+						<TextBlock TextWrapping="Wrap" Width="250">
+						Введите логин не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+						</TextBlock>
 					</ToolTip>
 				</TextBox.ToolTip>
 				<TextBox.Style>
@@ -170,6 +173,9 @@
 								<Setter Property="BorderBrush" Value="#84ada9"/>
 								<Setter Property="BorderThickness" Value="2"/>
 							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+								<Setter Property="BorderBrush" Value="Red"/>
+							</DataTrigger>
 						</Style.Triggers>
 					</Style>
 				</TextBox.Style>
@@ -212,53 +218,18 @@
 								<Setter Property="BorderBrush" Value="#84ada9"/>
 								<Setter Property="BorderThickness" Value="2"/>
 							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+								<Setter Property="BorderBrush" Value="Red"/>
+							</DataTrigger>
 						</Style.Triggers>
 					</Style>
 				</TextBox.Style>
 			</TextBox>
 			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="143,0,0,0" Foreground="#105e57"/>
-			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
-				<PasswordBox.ToolTip>
-					<ToolTip Style="{StaticResource CustomToolTipStyle}" >
-						Повторите набранный выше пароль
-					</ToolTip>
-				</PasswordBox.ToolTip>
-				<PasswordBox.Style>
-					<Style TargetType="PasswordBox">
-						<Setter Property="Background" Value="White"/>
-						<Setter Property="Template">
-							<Setter.Value>
-								<ControlTemplate TargetType="{x:Type PasswordBox}">
-									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-									</Border>
-								</ControlTemplate>
-							</Setter.Value>
-						</Setter>
-						<Style.Triggers>
-							<Trigger Property="IsFocused" Value="True">
-								<Setter Property="BorderBrush" Value="#84ada9"/>
-								<Setter Property="BorderThickness" Value="2"/>
-							</Trigger>
-							<Trigger Property="IsFocused" Value="False">
-								<Setter Property="BorderBrush" Value="#105e57"/>
-								<Setter Property="BorderThickness" Value="2"/>
-							</Trigger>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Cursor" Value="IBeam"/>
-								<Setter Property="BorderBrush" Value="#84ada9"/>
-								<Setter Property="BorderThickness" Value="2"/>
-							</Trigger>
-						</Style.Triggers>
-					</Style>
-				</PasswordBox.Style>
-			</PasswordBox>
-			<Label Grid.Row="1" Content="Повторите" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="170" Margin="105,53,0,0" Grid.RowSpan="2"/>
-			<Label Grid.Row="2" Content="пароль:" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="126" Margin="149,0,0,0"/>
-			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
+			<TextBox Name="PasswordRetrySneaky" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000">
 				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
-						Введите не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+						Введите пароль не более 30 символов
 					</ToolTip>
 				</TextBox.ToolTip>
 				<TextBox.Style>
@@ -291,6 +262,95 @@
 								<Setter Property="BorderBrush" Value="#84ada9"/>
 								<Setter Property="BorderThickness" Value="2"/>
 							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+								<Setter Property="BorderBrush" Value="Red"/>
+								</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</TextBox.Style>
+			</TextBox>
+			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
+				<PasswordBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						Повторите набранный выше пароль
+					</ToolTip>
+				</PasswordBox.ToolTip>
+				<PasswordBox.Style>
+					<Style TargetType="PasswordBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type PasswordBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"/>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+								<Setter Property="BorderBrush" Value="Red"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</PasswordBox.Style>
+			</PasswordBox>
+			<Label Grid.Row="1" Content="Повторите" HorizontalAlignment="Left" VerticalAlignment="Top"  FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="170" Margin="105,53,0,0" Grid.RowSpan="2"/>
+			<Label Grid.Row="2" Content="пароль:" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Arial Black" FontSize="27" Foreground="#105e57" Width="126" Margin="149,0,0,0"/>
+			<TextBox Name="Email" Grid.Row="3" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" MaxLines="1" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="Email_TextChanged">
+				<TextBox.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						<TextBlock TextWrapping="Wrap" Width="250">
+						Введите email не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
+						</TextBlock>
+					</ToolTip>
+				</TextBox.ToolTip>
+				<TextBox.Style>
+					<Style TargetType="TextBox">
+						<Setter Property="Background" Value="White"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+										<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsFocused" Value="True">
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsFocused" Value="False">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="Text" Value="">
+								<Setter Property="BorderBrush" Value="#105e57"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Cursor" Value="IBeam"></Setter>
+								<Setter Property="BorderBrush" Value="#84ada9"/>
+								<Setter Property="BorderThickness" Value="2"/>
+							</Trigger>
+							<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="True">
+								<Setter Property="BorderBrush" Value="Red"/>
+							</DataTrigger>
 						</Style.Triggers>
 					</Style>
 				</TextBox.Style>
@@ -321,7 +381,7 @@
 					</Style>
 				</Button.Style>
 			</Button>
-			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False" Cursor="Hand">
+			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False" Cursor="Hand" Click="SignUp_Click">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#9ae3ae"></Setter>
@@ -350,8 +410,10 @@
 					</Style>
 				</Button.Style>
 			</Button>
-			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"></CheckBox>
-			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="30,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Rockwell Extra Bold" Foreground="#105e57"/>
+			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Arial Black" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"></CheckBox>
+			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="65,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57"/>
+			<CheckBox x:Name="CheckPassword" HorizontalAlignment="Left" Margin="288,0,0,0" Grid.RowSpan="3" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57" Checked="CheckPassword_Checked" Unchecked="CheckPassword_Uncheked"/>
+			<Label Content="Посмотреть пароль" HorizontalAlignment="Left" Margin="303,0,0,59" Grid.RowSpan="2" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57" Grid.Row="2"/>
 		</Grid>
 	</Grid>
 </Window>
