@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -81,7 +82,7 @@ namespace AppProductDelivery
             bool isUsernameFilled = !string.IsNullOrEmpty(Login.Text);
             bool isEmailFilled = !string.IsNullOrEmpty(Email.Text);
             bool isPasswordFilled = !string.IsNullOrEmpty(Password.Text);
-            bool isRetryPasswordFilled = !string.IsNullOrEmpty(RetryPasword.Password);
+            bool isRetryPasswordFilled = !string.IsNullOrEmpty(RetryPassword.Password);
             bool isTermsAccepted = AcceptTerm.IsChecked == true;
 
             SignUp.IsEnabled = isUsernameFilled && isPasswordFilled && isTermsAccepted && isEmailFilled && isRetryPasswordFilled;
@@ -128,6 +129,7 @@ namespace AppProductDelivery
             ImageScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
         }
 
+        //кнопка минимизации
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             var animation = new DoubleAnimation
@@ -136,10 +138,29 @@ namespace AppProductDelivery
                 To = 0.0,
                 Duration = new Duration(TimeSpan.FromSeconds(0.5))
             };
-            animation.Completed += (s, args) => this.Hide();
+            animation.Completed += (s, args) =>
+            {
+                this.WindowState = WindowState.Minimized;
+                this.StateChanged += Window_StateChanged;
+            };
             this.BeginAnimation(UIElement.OpacityProperty, animation);
         }
 
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                var animation = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 1.0,
+                    Duration = new Duration(TimeSpan.FromSeconds(0.5))
+                };
+                this.BeginAnimation(UIElement.OpacityProperty, animation);
+                this.StateChanged -= Window_StateChanged;
+            }
+        }
+        //кнопка закрытия
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             var animation = new DoubleAnimation
@@ -151,21 +172,23 @@ namespace AppProductDelivery
             animation.Completed += (s, args) => this.Close();
             this.BeginAnimation(UIElement.OpacityProperty, animation);
         }
+
         // Нажатие чекбокса просмотреть пароль
         private void CheckPassword_Checked(object sender, RoutedEventArgs e)
         {
-            PasswordRetrySneaky.Text = RetryPasword.Password;
-            RetryPasword.Visibility = Visibility.Collapsed;
-            PasswordRetrySneaky.Visibility = Visibility.Visible;
+                PasswordRetrySneaky.Text = RetryPassword.Password;
+                RetryPassword.Visibility = Visibility.Collapsed;
+                PasswordRetrySneaky.Visibility = Visibility.Visible;
         }
 
-        private void CheckPassword_Uncheked(object sender, RoutedEventArgs e)
+        private void CheckPassword_Unchecked(object sender, RoutedEventArgs e)
         {
-            RetryPasword.Password = PasswordRetrySneaky.Text;
-            PasswordRetrySneaky.Visibility = Visibility.Collapsed;
-            RetryPasword.Visibility = Visibility.Visible;
+                RetryPassword.Password = PasswordRetrySneaky.Text;
+                PasswordRetrySneaky.Visibility = Visibility.Collapsed;
+                RetryPassword.Visibility = Visibility.Visible;
         }
-        // проверка на наличие спец символов и соответствие пароля
+
+        // проверка на наличие спец символов и соответствие пароля для кнопки регистрации
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
             bool isValid = true;
@@ -190,15 +213,15 @@ namespace AppProductDelivery
                 Password.Tag  = false;
             }
 
-            if (RetryPasword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
+            if (RetryPassword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
             {
-                RetryPasword.Tag  = true;
+                RetryPassword.Tag  = true;
                 PasswordRetrySneaky.Tag = true;
                 isValid = false;
             }
             else
             {
-                RetryPasword.Tag  = false;
+                RetryPassword.Tag  = false;
                 PasswordRetrySneaky.Tag = false;
             }
 
@@ -214,11 +237,11 @@ namespace AppProductDelivery
 
             if (isValid)
             {
-                MessageBox.Show("Регистрация успешно пройдена!");
+                MessageBox.Show("Регистрация прошла успешно!");
             }
             else
             {
-                MessageBox.Show("Пожалуйста исправьте ошибки!.");
+                MessageBox.Show("Пожалуйста исправьте ошибки!");
             }
         }
         //Функции для проверки спец знаков
@@ -256,5 +279,62 @@ namespace AppProductDelivery
                 this.DragMove();
             }
         }
+        // проверка на наличие спец символов и соответствие пароля для кнопки войти
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(Login.Text) || !IsValidLogin(Login.Text))
+            {
+                Login.Tag  = true;
+                isValid = false;
+            }
+            else
+            {
+                Login.Tag  = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password.Text))
+            {
+                Password.Tag = true;
+                isValid = false;
+            }
+            else
+            {
+                Password.Tag  = false;
+            }
+
+            if (RetryPassword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
+            {
+                RetryPassword.Tag  = true;
+                PasswordRetrySneaky.Tag = true;
+                isValid = false;
+            }
+            else
+            {
+                RetryPassword.Tag  = false;
+                PasswordRetrySneaky.Tag = false;
+            }
+
+            if (!IsValidEmail(Email.Text))
+            {
+                Email.Tag  = true;
+                isValid = false;
+            }
+            else
+            {
+                Email.Tag  = false;
+            }
+
+            if (isValid)
+            {
+                MessageBox.Show("Вход прошёл успешно!");
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста исправьте ошибки!");
+            }
+        }
     }
 }
+

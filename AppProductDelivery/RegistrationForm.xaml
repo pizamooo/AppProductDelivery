@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:AppProductDelivery"
         mc:Ignorable="d"
         Title="RegistrationForm" Height="450" Width="800" 
-		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="None"
-		 AllowsTransparency="True"
+		Background="#c5db91" ResizeMode="CanMinimize"  WindowStyle="None" AllowsTransparency="True"
 		WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown">
 	<Window.Resources>
 		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
@@ -269,7 +268,7 @@
 					</Style>
 				</TextBox.Style>
 			</TextBox>
-			<PasswordBox Name="RetryPasword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
+			<PasswordBox Name="RetryPassword" Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" PasswordChanged="RetryPasword_PasswordChanged">
 				<PasswordBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Повторите набранный выше пароль
@@ -356,7 +355,7 @@
 				</TextBox.Style>
 			</TextBox>
 			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="173,0,0,0" Foreground="#105e57"/>
-			<Button Name="LogIn" Content="Войти" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18" Cursor="Hand">
+			<Button Name="LogIn" Content="Войти" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18" Cursor="Hand" Click="LogIn_Click">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#9ae3ae"></Setter>
@@ -412,7 +411,7 @@
 			</Button>
 			<CheckBox Name="AcceptTerm" HorizontalAlignment="Center" Margin="0,0,275,3" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Arial Black" Checked="AcceptTerm_Checked" Unchecked="AcceptTerm_Checked"></CheckBox>
 			<Label Content="Согласие на обработку персональных данных" HorizontalAlignment="Center" Margin="65,0,0,0" Grid.Row="4" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57"/>
-			<CheckBox x:Name="CheckPassword" HorizontalAlignment="Left" Margin="288,0,0,0" Grid.RowSpan="3" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57" Checked="CheckPassword_Checked" Unchecked="CheckPassword_Uncheked"/>
+			<CheckBox x:Name="CheckPassword" HorizontalAlignment="Left" Margin="288,0,0,0" Grid.RowSpan="3" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57" Checked="CheckPassword_Checked" Unchecked="CheckPassword_Unchecked"/>
 			<Label Content="Посмотреть пароль" HorizontalAlignment="Left" Margin="303,0,0,59" Grid.RowSpan="2" VerticalAlignment="Bottom" FontFamily="Arial Black" Foreground="#105e57" Grid.Row="2"/>
 		</Grid>
 	</Grid>
