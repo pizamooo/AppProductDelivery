@@ -245,16 +245,19 @@ namespace AppProductDelivery
             {
                 if (RegisterUser(login, password, email))
                 {
-                    MessageBox.Show("Регистрация успешна!");
+                    ShowCustomMessageBox("Регистрация успешна!");
+                    MainWindowApp window = new MainWindowApp(login);
+                    window.Show();
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка регистрации.");
+                    ShowCustomMessageBox("Ошибка регистрации. Возможно такой логин уже существует");
                 }
             }
             else
             {
-                MessageBox.Show("Пожалуйста исправьте ошибки!");
+                ShowCustomMessageBox("Пожалуйста исправьте ошибки!");
             }
         }
         //Функции для проверки спец знаков
@@ -329,15 +332,21 @@ namespace AppProductDelivery
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("SQL error: " + sqlEx.Message);
+                    ShowCustomMessageBox("SQL error: " + sqlEx.Message);
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Database error: " + ex.Message);
+                    ShowCustomMessageBox("Database error: " + ex.Message);
                     return false;
                 }
             }
+        }
+
+        private void ShowCustomMessageBox(string message)
+        {
+            CustomMessageBox customMessageBox = new CustomMessageBox(message);
+            customMessageBox.ShowDialog();
         }
     }
 }

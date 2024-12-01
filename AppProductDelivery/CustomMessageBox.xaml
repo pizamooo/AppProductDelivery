@@ -1,0 +1,20 @@
+﻿<Window x:Class="AppProductDelivery.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppProductDelivery"
+        mc:Ignorable="d"
+        Title="CustomMessageBox" Height="200" Width="400" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+	<Border Background="#d1e8d7" BorderBrush="#b0d9d5" BorderThickness="1" CornerRadius="10" Padding="20">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<TextBlock x:Name="MessageTextBlock" Text="Message here" FontSize="17" Margin="0,0,0,10" FontFamily="Arial Black" TextWrapping="Wrap"/>
+			<Button x:Name="OkButton" Content="OK" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Height="20" Click="OkButton_Click" Grid.Row="2" Background="Azure" Foreground="Black" FontFamily="Arial Black" BorderBrush="#b0d9d5" Cursor="Hand"/>
+		</Grid>
+	</Border>
+</Window>
