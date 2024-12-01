@@ -18,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace AppProductDelivery
 {
@@ -54,13 +56,13 @@ namespace AppProductDelivery
                 var imageScaleAnimationY = new DoubleAnimation(1, TimeSpan.FromSeconds(0.5));
                 var imageOpacityAnimation = new DoubleAnimation(1, TimeSpan.FromSeconds(0.5));
 
-                // Настраивание анимации для текста
                 var textStoryboard = new Storyboard();
                 textStoryboard.Children.Add(textScaleAnimationX);
                 textStoryboard.Children.Add(textScaleAnimationY);
                 textStoryboard.Children.Add(textOpacityAnimation);
                 Storyboard.SetTarget(textScaleAnimationX, Greeting);
                 Storyboard.SetTargetProperty(textScaleAnimationX, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
+                // Настраивание анимации для текста
                 Storyboard.SetTarget(textScaleAnimationY, Greeting);
                 Storyboard.SetTargetProperty(textScaleAnimationY, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleY)"));
                 Storyboard.SetTarget(textOpacityAnimation, Greeting);
@@ -81,7 +83,7 @@ namespace AppProductDelivery
         {
             bool isUsernameFilled = !string.IsNullOrEmpty(Login.Text);
             bool isEmailFilled = !string.IsNullOrEmpty(Email.Text);
-            bool isPasswordFilled = !string.IsNullOrEmpty(Password.Text);
+            bool isPasswordFilled = !string.IsNullOrEmpty(Password.Password);
             bool isRetryPasswordFilled = !string.IsNullOrEmpty(RetryPassword.Password);
             bool isTermsAccepted = AcceptTerm.IsChecked == true;
 
@@ -103,12 +105,12 @@ namespace AppProductDelivery
             UpdateSignUpButtonState();
         }
 
-        private void Password_TextChanged(object sender, TextChangedEventArgs e)
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             UpdateSignUpButtonState();
         }
 
-        private void RetryPasword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void RetryPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             UpdateSignUpButtonState();
         }
@@ -176,16 +178,16 @@ namespace AppProductDelivery
         // Нажатие чекбокса просмотреть пароль
         private void CheckPassword_Checked(object sender, RoutedEventArgs e)
         {
-                PasswordRetrySneaky.Text = RetryPassword.Password;
-                RetryPassword.Visibility = Visibility.Collapsed;
-                PasswordRetrySneaky.Visibility = Visibility.Visible;
+            PasswordRetrySneaky.Text = RetryPassword.Password;
+            RetryPassword.Visibility = Visibility.Collapsed;
+            PasswordRetrySneaky.Visibility = Visibility.Visible;
         }
 
         private void CheckPassword_Unchecked(object sender, RoutedEventArgs e)
         {
-                RetryPassword.Password = PasswordRetrySneaky.Text;
-                PasswordRetrySneaky.Visibility = Visibility.Collapsed;
-                RetryPassword.Visibility = Visibility.Visible;
+            RetryPassword.Password = PasswordRetrySneaky.Text;
+            PasswordRetrySneaky.Visibility = Visibility.Collapsed;
+            RetryPassword.Visibility = Visibility.Visible;
         }
 
         // проверка на наличие спец символов и соответствие пароля для кнопки регистрации
@@ -193,7 +195,11 @@ namespace AppProductDelivery
         {
             bool isValid = true;
 
-            if (string.IsNullOrWhiteSpace(Login.Text) || !IsValidLogin(Login.Text))
+            string login = Login.Text;
+            string password = Password.Password;
+            string email = Email.Text;
+
+            if (string.IsNullOrWhiteSpace(Login.Text) || Login.Text.Length < 5 || !IsValidLogin(Login.Text))
             {
                 Login.Tag  = true;
                 isValid = false;
@@ -203,7 +209,7 @@ namespace AppProductDelivery
                 Login.Tag  = false;
             }
 
-            if (string.IsNullOrWhiteSpace(Password.Text))
+            if (string.IsNullOrWhiteSpace(Password.Password) || Password.Password.Length < 5)
             {
                 Password.Tag = true;
                 isValid = false;
@@ -213,7 +219,7 @@ namespace AppProductDelivery
                 Password.Tag  = false;
             }
 
-            if (RetryPassword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
+            if (RetryPassword.Password != Password.Password && PasswordRetrySneaky.Text != Password.Password)
             {
                 RetryPassword.Tag  = true;
                 PasswordRetrySneaky.Tag = true;
@@ -237,7 +243,14 @@ namespace AppProductDelivery
 
             if (isValid)
             {
-                MessageBox.Show("Регистрация прошла успешно!");
+                if (RegisterUser(login, password, email))
+                {
+                    MessageBox.Show("Регистрация успешна!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка регистрации.");
+                }
             }
             else
             {
@@ -282,57 +295,48 @@ namespace AppProductDelivery
         // проверка на наличие спец символов и соответствие пароля для кнопки войти
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            bool isValid = true;
+            LogInForm window = new LogInForm();
+            window.Show();
+            this.Close();
+        }
 
-            if (string.IsNullOrWhiteSpace(Login.Text) || !IsValidLogin(Login.Text))
-            {
-                Login.Tag  = true;
-                isValid = false;
-            }
-            else
-            {
-                Login.Tag  = false;
-            }
+        private bool RegisterUser(string login, string password, string email)
+        {
+            string connectionString="data source=DESKTOP-L92S7VB;initial catalog=ProductDelivery;integrated security=True;";
 
-            if (string.IsNullOrWhiteSpace(Password.Text))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                Password.Tag = true;
-                isValid = false;
-            }
-            else
-            {
-                Password.Tag  = false;
-            }
+                try
+                {
+                    connection.Open();
 
-            if (RetryPassword.Password != Password.Text && PasswordRetrySneaky.Text != Password.Text)
-            {
-                RetryPassword.Tag  = true;
-                PasswordRetrySneaky.Tag = true;
-                isValid = false;
-            }
-            else
-            {
-                RetryPassword.Tag  = false;
-                PasswordRetrySneaky.Tag = false;
-            }
+                    SqlCommand checkUserCmd = new SqlCommand("SELECT COUNT(*) FROM Employees WHERE login = @login", connection);
+                    checkUserCmd.Parameters.AddWithValue("@login", login);
+                    int userExists = (int)checkUserCmd.ExecuteScalar();
+                    if (userExists > 0)
+                        return false;
 
-            if (!IsValidEmail(Email.Text))
-            {
-                Email.Tag  = true;
-                isValid = false;
-            }
-            else
-            {
-                Email.Tag  = false;
-            }
+                    SqlCommand insertUserCmd = new SqlCommand("INSERT INTO Employees (login, password, email) VALUES (@login,@password,@email)", connection);
+                    insertUserCmd.Parameters.AddWithValue("@login", login);
+                    insertUserCmd.Parameters.AddWithValue("@password", password);
+                    insertUserCmd.Parameters.AddWithValue("@email", email);
 
-            if (isValid)
-            {
-                MessageBox.Show("Вход прошёл успешно!");
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста исправьте ошибки!");
+
+                    insertUserCmd.ExecuteNonQuery();
+
+
+                    return true;
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("SQL error: " + sqlEx.Message);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Database error: " + ex.Message);
+                    return false;
+                }
             }
         }
     }

@@ -35,9 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,8 +72,56 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Deliveries.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryDetails.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employees.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogInForm.xaml.cs">
+      <DependentUpon>LogInForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetails.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDelivery.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDelivery.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDelivery.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDelivery.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDelivery.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
     <Compile Include="RegistrationForm.xaml.cs">
       <DependentUpon>RegistrationForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Suppliers.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserAdmins.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +142,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ProductDelivery.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductDelivery.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="ProductDelivery.edmx.diagram">
+      <DependentUpon>ProductDelivery.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,6 +159,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="LogInForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegistrationForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +188,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProductDelivery.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ProductDelivery.Context.cs</LastGenOutput>
+      <DependentUpon>ProductDelivery.edmx</DependentUpon>
+    </Content>
+    <Content Include="ProductDelivery.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDelivery.edmx</DependentUpon>
+      <LastGenOutput>ProductDelivery.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
