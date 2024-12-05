@@ -220,7 +220,7 @@
 				</PasswordBox.Style>
 			</PasswordBox>
 			<Label Grid.Row="1" Content="Пароль:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="143,0,0,0" Foreground="#105e57"/>
-			<TextBox Name="PasswordRetrySneaky" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000">
+			<TextBox Name="PasswordRetrySneaky" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="205" Height="25" Margin="270,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="PasswordRetrySneaky_TextChanged">
 				<TextBox.ToolTip>
 					<ToolTip Style="{StaticResource CustomToolTipStyle}">
 						Введите пароль не более 30 символов
@@ -375,7 +375,7 @@
 					</Style>
 				</Button.Style>
 			</Button>
-			<Button Name="SignUp" Content="Зарегистрироваться" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False" Cursor="Hand" Click="SignUp_Click">
+			<Button Name="SignUp" Content="Зарегистрировать" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="225,0,0,20" Width="215" Height="30" FontSize="18" IsEnabled="False" Cursor="Hand" Click="SignUp_Click">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#9ae3ae"></Setter>

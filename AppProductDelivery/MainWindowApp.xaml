@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppProductDelivery"
         mc:Ignorable="d"
-        Title="MainWindowApp" Height="600" Width="800" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="MainWindowApp" Height="400" Width="800" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
 	<Window.Resources>
 		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
 			<Setter Property="Background" Value="#bcdde3"/>
@@ -21,7 +21,11 @@
 	</Window.Resources>
 	<Border Background="#d1e8d7" BorderBrush="#b0d9d5" BorderThickness="5" CornerRadius="30" Padding="20">
 		<Grid>
-			<Button Content="-" FontWeight="Bold" FontSize="16" Width="25" Height="20" Click="MinimizeButton_Click" FontFamily="Arial Black" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20,27,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="120*"/>
+				<ColumnDefinition Width="305*"/>
+			</Grid.ColumnDefinitions>
+			<Button Content="-" FontWeight="Bold" FontSize="16" Width="25" Height="20" Click="MinimizeButton_Click" FontFamily="Arial Black" Cursor="Hand" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20,27,0" Grid.Column="1">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#bcdde3"/>
@@ -45,7 +49,7 @@
 					</Style>
 				</Button.Style>
 			</Button>
-			<Button Content="x" FontWeight="Bold" FontSize="16" Width="25" Height="20" Click="CloseButton_Click" FontFamily="Arial Black" VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" Margin="0,-20,2,0">
+			<Button Content="x" FontWeight="Bold" FontSize="16" Width="25" Height="20" Click="CloseButton_Click" FontFamily="Arial Black" VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" Margin="0,-20,2,0" Grid.Column="1">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#e08484"/>
@@ -101,9 +105,71 @@
 					</ToolTip>
 				</Button.ToolTip>
 			</Button>
-			<TextBlock Text="Добро пожаловать!" Name="Greeting" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,-20,0,0" Width="180" Height="20"></TextBlock>
-			<TextBlock Name="LoginName" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,-20,0,0" Width="250" Height="20" Foreground="#5e34eb"></TextBlock>
+			<TextBlock Text="Добро пожаловать!" Name="Greeting" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,-20,0,0" Width="180" Height="20" Grid.ColumnSpan="2" Foreground="Navy"></TextBlock>
+			<TextBlock Name="LoginName" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="43,-20,0,0" Width="250" Height="20" Foreground="Coral" Grid.Column="1"></TextBlock>
 
-		</Grid>
+			<Label Name="OrderLabel" Content="Заказ" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,20,0,0" Cursor="Hand">
+				<Label.Style>
+					<Style TargetType="Label">
+						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="Indigo"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Label.Style>
+			</Label>
+			<Label Name="Suppliers" Content="Поставщики"  HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,70,0,0" Cursor="Hand" MouseDown="Suppliers_MouseDown">
+				<Label.Style>
+					<Style TargetType="Label">
+						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="Indigo"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Label.Style>
+			</Label>
+			<Label Name="InfoAboutProducts" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,130,0,0" Cursor="Hand" MouseDown="InfoAboutProducts_MouseDown">
+				<TextBlock TextWrapping="Wrap">Информация о продукции
+					<TextBlock.Style>
+						<Style TargetType="TextBlock">
+							<Setter Property="Foreground" Value="DarkCyan"></Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Foreground" Value="Indigo"></Setter>
+								</Trigger>
+								<Trigger Property="IsFocused" Value="True">
+									<Setter Property="Foreground" Value="Indigo"></Setter>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</TextBlock.Style>
+				</TextBlock>
+			</Label>
+			<Label Name="Delivery" Content="Доставка" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,210,0,0" Cursor="Hand" MouseDown="Delivery_MouseDown">
+				<Label.Style>
+					<Style TargetType="Label">
+						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="Indigo"></Setter>
+							</Trigger>
+							<Trigger Property="IsMouseCaptureWithin" Value="True">
+								<Setter Property="Foreground" Value="Indigo"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Label.Style>
+			</Label>
+
+			<Border Grid.Column="1" Background="DarkCyan" BorderBrush="DarkCyan" BorderThickness="5" CornerRadius="30" Padding="10">
+				<Grid Grid.Column="1">
+					<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+				</Grid>
+			</Border>
+	</Grid>
 	</Border>
 </Window>

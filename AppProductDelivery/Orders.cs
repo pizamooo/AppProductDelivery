@@ -17,7 +17,7 @@ namespace AppProductDelivery
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
-            this.OrderDetails = new HashSet<OrderDetails>();
+            this.Deliveries = new HashSet<Deliveries>();
         }
     
         public int OrderID { get; set; }
@@ -25,6 +25,6 @@ namespace AppProductDelivery
         public Nullable<double> TotalAmount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<Deliveries> Deliveries { get; set; }
     }
 }

@@ -7,17 +7,6 @@
         mc:Ignorable="d"
         Title="LogInForm" Height="350" Width="300" WindowStartupLocation="CenterScreen" Background="#c5db91" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" ResizeMode="NoResize">
 	<Window.Resources>
-		<Style x:Key="CustomToolTipStyle" TargetType="ToolTip">
-			<Setter Property="Background" Value="#cbe8ac"/>
-			<Setter Property="Foreground" Value="Black"/>
-			<Setter Property="FontSize" Value="11"/>
-			<Setter Property="Padding" Value="5"/>
-			<Setter Property="FontFamily" Value="Arial Black"/>
-			<Setter Property="BorderBrush" Value="Black"/>
-			<Setter Property="BorderThickness" Value="1"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
 		<Style TargetType="CheckBox">
 			<Setter Property="BorderBrush" Value="Green"/>
 			<Setter Property="BorderThickness" Value="2"/>
@@ -87,13 +76,6 @@
 		<Label Content="Логин:" FontFamily="Arial Black" FontSize="16" Foreground="#105e57" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,75,140,0"></Label>
 		<Label Content="Пароль:" FontFamily="Arial Black" FontSize="16" Foreground="#105e57" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,137,130,0"></Label>
 		<TextBox Name="Login" Width="200" Height="30" Margin="0,5,0,130" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" FontFamily="Arial Black" FontSize="16" MaxLength="30">
-			<TextBox.ToolTip>
-				<ToolTip Style="{StaticResource CustomToolTipStyle}">
-					<TextBlock TextWrapping="Wrap" Width="250">
-			Введите логин не менее 5 и не более 30 символов, не используя специальные знаки: "?", "!" и т.д.
-					</TextBlock>
-				</ToolTip>
-			</TextBox.ToolTip>
 			<TextBox.Style>
 				<Style TargetType="TextBox">
 					<Setter Property="Background" Value="White"/>
@@ -132,12 +114,7 @@
 			</TextBox.Style>
 		</TextBox>
 
-		<TextBox Name="PasswordRetrySneaky" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000">
-			<TextBox.ToolTip>
-				<ToolTip Style="{StaticResource CustomToolTipStyle}">
-					Введите пароль не более 30 символов
-				</ToolTip>
-			</TextBox.ToolTip>
+		<TextBox Name="PasswordRetrySneaky" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" TextChanged="PasswordRetrySneaky_TextChanged">
 			<TextBox.Style>
 				<Style TargetType="TextBox">
 					<Setter Property="Background" Value="White"/>
@@ -176,11 +153,6 @@
 			</TextBox.Style>
 		</TextBox>
 		<PasswordBox Name="Password" Width="200" Height="30" Margin="0,0,0,0" ToolTipService.InitialShowDelay="500" ToolTipService.ShowDuration="10000" FontSize="16" MaxLength="30" FontFamily="Arial Black">
-			<PasswordBox.ToolTip>
-				<ToolTip Style="{StaticResource CustomToolTipStyle}">
-					Введите логин не менее 5 и не более 30 символов
-				</ToolTip>
-			</PasswordBox.ToolTip>
 			<PasswordBox.Style>
 				<Style TargetType="PasswordBox">
 					<Setter Property="Background" Value="White"/>
@@ -215,8 +187,10 @@
 			</PasswordBox.Style>
 		</PasswordBox>
 
-		<Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="Arial Black" FontSize="20" Foreground="#105e57">
-			<TextBlock Text="Назад" TextDecorations="Underline" Cursor="Hand" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownBack">
+		<Label VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="Arial Black" FontSize="15" Foreground="#105e57">
+			<TextBlock TextWrapping="Wrap" TextAlignment="Center" TextDecorations="Underline" Cursor="Hand" MouseLeftButtonDown="TextBlock_MouseLeftButtonDownBack">
+				<Run>Зарегистрировать пользователя</Run>
+				<Run> (Только для админов)</Run>
 				<TextBlock.Style>
 					<Style TargetType="TextBlock">
 						<Setter Property="Foreground" Value="#105e57"/>

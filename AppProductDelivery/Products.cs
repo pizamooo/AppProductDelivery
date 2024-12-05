@@ -17,22 +17,19 @@ namespace AppProductDelivery
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
-            this.DeliveryDetails = new HashSet<DeliveryDetails>();
+            this.Deliveries = new HashSet<Deliveries>();
             this.Inventory = new HashSet<Inventory>();
-            this.OrderDetails = new HashSet<OrderDetails>();
         }
     
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
         public string Unit { get; set; }
-        public double Price { get; set; }
+        public Nullable<double> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryDetails> DeliveryDetails { get; set; }
+        public virtual ICollection<Deliveries> Deliveries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

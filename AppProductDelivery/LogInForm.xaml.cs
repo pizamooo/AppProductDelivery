@@ -36,9 +36,8 @@ namespace AppProductDelivery
 
         private void TextBlock_MouseLeftButtonDownBack(object sender, MouseButtonEventArgs e)
         {
-            RegistrationForm window = new RegistrationForm();
-            window.Show();
-            this.Close();
+            AdminLoginWindow window = new AdminLoginWindow(this);
+            window.ShowDialog();
         }
         //кнопка скрытия
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -116,7 +115,7 @@ namespace AppProductDelivery
                 try
                 {
                     connection.Open();
-                    string query = "SELECT COUNT(1) FROM Employees WHERE Login=@login AND Password=@password";
+                    string query = "SELECT COUNT(1) FROM Employees WHERE Login COLLATE Latin1_General_CS_AS = @login AND Password COLLATE Latin1_General_CS_AS = @password";
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@login", login);
                     cmd.Parameters.AddWithValue("@password", password);
@@ -134,6 +133,12 @@ namespace AppProductDelivery
                         ShowCustomMessageBox("Неверный логин или пароль.");
                     }
                 }
+
+                catch (SqlException sqlEx)
+                {
+                    ShowCustomMessageBox("Ошибка базы данных: " + sqlEx.Message);
+                }
+
                 catch (Exception ex)
                 {
                     ShowCustomMessageBox("Ошибка: " + ex.Message);
@@ -145,6 +150,11 @@ namespace AppProductDelivery
         {
             CustomMessageBox customMessageBox = new CustomMessageBox(message);
             customMessageBox.ShowDialog();
+        }
+
+        private void PasswordRetrySneaky_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Password.Password = PasswordRetrySneaky.Text;
         }
     }
 }

@@ -115,6 +115,11 @@ namespace AppProductDelivery
             UpdateSignUpButtonState();
         }
 
+        private void PasswordRetrySneaky_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RetryPassword.Password = PasswordRetrySneaky.Text;
+        }
+
         private void StartAnimationInRegistrationForm()
         {
             DoubleAnimation scaleAnimation = new DoubleAnimation
@@ -348,6 +353,7 @@ namespace AppProductDelivery
             CustomMessageBox customMessageBox = new CustomMessageBox(message);
             customMessageBox.ShowDialog();
         }
+
     }
 }
 

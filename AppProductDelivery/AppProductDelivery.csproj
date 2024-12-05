@@ -68,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminLoginWindow.xaml.cs">
+      <DependentUpon>AdminLoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -76,9 +79,6 @@
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Deliveries.cs">
-      <DependentUpon>ProductDelivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DeliveryDetails.cs">
       <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
     <Compile Include="Employees.cs">
@@ -93,11 +93,17 @@
     <Compile Include="MainWindowApp.xaml.cs">
       <DependentUpon>MainWindowApp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrderDetails.cs">
-      <DependentUpon>ProductDelivery.tt</DependentUpon>
-    </Compile>
     <Compile Include="Orders.cs">
       <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageAboutProducts.xaml.cs">
+      <DependentUpon>PageAboutProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageDelivery.xaml.cs">
+      <DependentUpon>PageDelivery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageSuppliers.xaml.cs">
+      <DependentUpon>PageSuppliers.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductDelivery.Context.cs">
       <AutoGen>True</AutoGen>
@@ -120,13 +126,19 @@
     <Compile Include="RegistrationForm.xaml.cs">
       <DependentUpon>RegistrationForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shifts.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
+    </Compile>
     <Compile Include="Suppliers.cs">
       <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ProductDelivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserAdmins.cs">
       <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -148,11 +160,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <EntityDeploy Include="ProductDelivery.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProductDelivery.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
     <None Include="ProductDelivery.edmx.diagram">
       <DependentUpon>ProductDelivery.edmx</DependentUpon>
     </None>
@@ -165,6 +177,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AdminLoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +190,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindowApp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageAboutProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageDelivery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageSuppliers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,19 +232,19 @@
     <Resource Include="Images\mail.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ProductDelivery.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ProductDelivery.Context.cs</LastGenOutput>
       <DependentUpon>ProductDelivery.edmx</DependentUpon>
+      <LastGenOutput>ProductDelivery.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ProductDelivery.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProductDelivery.edmx</DependentUpon>
       <LastGenOutput>ProductDelivery.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

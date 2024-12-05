@@ -1,0 +1,138 @@
+﻿<Window x:Class="AppProductDelivery.AdminLoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppProductDelivery"
+        mc:Ignorable="d"
+        Title="AdminLoginWindow" Height="250" Width="250" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#c5db91" WindowStyle="None">
+	<Grid>
+		<Border Grid.Column="1" BorderBrush="#212e04" BorderThickness="3,3,3,3">
+			<StackPanel>
+				<Button Content="x" FontWeight="Bold" FontSize="16" Width="24" Click="CloseButton_Click" FontFamily="Arial Black" Cursor="Hand" HorizontalAlignment="Right">
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Background" Value="#e08484"/>
+							<Setter Property="BorderBrush" Value="#212e04"/>
+							<Setter Property="BorderThickness" Value="1.5,0,0,1.5"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type Button}">
+										<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+											<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="Red"/>
+									<Setter Property="Foreground" Value="White"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+				</Button>
+			</StackPanel>
+		</Border>
+		
+		<TextBox Name="Login" Margin="0,0,0,110" Width="200" Height="30" FontFamily="Arial Black" FontSize="16" MaxLength="30">
+			<TextBox.Style>
+				<Style TargetType="TextBox">
+					<Setter Property="Background" Value="White"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type TextBox}">
+								<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+									<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsFocused" Value="True">
+							<Setter Property="BorderBrush" Value="#84ada9"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+						<Trigger Property="IsFocused" Value="False">
+							<Setter Property="BorderBrush" Value="#105e57"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+						<Trigger Property="Text" Value="">
+							<Setter Property="BorderBrush" Value="#105e57"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Cursor" Value="IBeam"></Setter>
+							<Setter Property="BorderBrush" Value="#84ada9"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</TextBox.Style>
+		</TextBox>
+		<PasswordBox Name="Password" Width="200" Height="30" Margin="0,30,0,0" FontSize="16" MaxLength="30" FontFamily="Arial Black">
+			<PasswordBox.Style>
+				<Style TargetType="PasswordBox">
+					<Setter Property="Background" Value="White"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type PasswordBox}">
+								<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+									<ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsFocused" Value="True">
+							<Setter Property="BorderBrush" Value="#84ada9"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+						<Trigger Property="IsFocused" Value="False">
+							<Setter Property="BorderBrush" Value="#105e57"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Cursor" Value="IBeam"/>
+							<Setter Property="BorderBrush" Value="#84ada9"/>
+							<Setter Property="BorderThickness" Value="2"/>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</PasswordBox.Style>
+		</PasswordBox>
+		<Button Name="Enter" Width="180" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,30" Content="Перейти" FontFamily="Arial Black" Cursor="Hand" FontSize="20" Click="Enter_Click">
+			<Button.Style>
+				<Style TargetType="Button">
+					<Setter Property="Background" Value="#9ae3ae"></Setter>
+					<Setter Property="Foreground" Value="Black"></Setter>
+					<Setter Property="BorderBrush" Value="Black"></Setter>
+					<Setter Property="BorderThickness" Value="1"></Setter>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Button}">
+								<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+									<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="#68de99"></Setter>
+							<Setter Property="Foreground" Value="#0f5930"></Setter>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Background" Value="#879c90"></Setter>
+							<Setter Property="Foreground" Value="#48524c"></Setter>
+						</Trigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
+
+		<Label Content="Логин:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,14,0,0" FontSize="20" FontFamily="Arial Black" Foreground="#105e57"></Label>
+		<Label Content="Пароль:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,84,0,0" FontSize="20" FontFamily="Arial Black" Foreground="#105e57"></Label>
+	</Grid>
+</Window>

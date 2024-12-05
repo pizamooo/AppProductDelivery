@@ -69,7 +69,7 @@ namespace AppProductDelivery
             animation.Completed += (s, args) => this.Close();
             this.BeginAnimation(UIElement.OpacityProperty, animation);
         }
-
+        //передвижение окна
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -77,12 +77,27 @@ namespace AppProductDelivery
                 this.DragMove();
             }
         }
-
+        //выход на авторизацию
         private void ExitToBack_Click(object sender, RoutedEventArgs e)
         {
             LogInForm window = new LogInForm();
             window.Show();
             this.Close();
+        }
+
+        private void Suppliers_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new PageSuppliers());
+        }
+
+        private void InfoAboutProducts_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new PageAboutProducts());
+        }
+
+        private void Delivery_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new PageDelivery());
         }
     }
 }

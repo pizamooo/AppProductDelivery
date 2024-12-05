@@ -12,12 +12,14 @@ namespace AppProductDelivery
     using System;
     using System.Collections.Generic;
     
-    public partial class UserAdmins
+    public partial class Shifts
     {
-        public int id { get; set; }
-        public string admin_login { get; set; }
-        public string admin_password { get; set; }
-        public string email { get; set; }
-        public string Position { get; set; }
+        public int ShiftID { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
+        public Nullable<System.DateTime> ShiftDate { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
+    
+        public virtual Employees Employees { get; set; }
     }
 }

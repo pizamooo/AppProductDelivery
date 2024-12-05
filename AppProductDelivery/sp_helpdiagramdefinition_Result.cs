@@ -10,17 +10,10 @@
 namespace AppProductDelivery
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class OrderDetails
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int OrderDetailID { get; set; }
-        public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<double> UnitPrice { get; set; }
-    
-        public virtual Orders Orders { get; set; }
-        public virtual Products Products { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

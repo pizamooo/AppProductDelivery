@@ -10,17 +10,13 @@
 namespace AppProductDelivery
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DeliveryDetails
+    public partial class sp_helpdiagrams_Result
     {
-        public int DeliveryDetailID { get; set; }
-        public int DeliveryID { get; set; }
-        public int ProductID { get; set; }
-        public int Quantity { get; set; }
-        public double UnitPrice { get; set; }
-    
-        public virtual Deliveries Deliveries { get; set; }
-        public virtual Products Products { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace AppProductDelivery
     {
         public int InventoryID { get; set; }
         public Nullable<int> ProductID { get; set; }
+        public Nullable<int> DeliveryID { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> MinQuantity { get; set; }
-        public int MaxQuantity { get; set; }
     
+        public virtual Deliveries Deliveries { get; set; }
         public virtual Products Products { get; set; }
     }
 }

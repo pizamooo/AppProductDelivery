@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\HP\source\repos\AppProductDelivery\AppProductDelivery\ProductDelivery.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\HP\Source\Repos\AppProductDelivery\AppProductDelivery\ProductDelivery.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.
