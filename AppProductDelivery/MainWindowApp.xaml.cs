@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,15 @@ namespace AppProductDelivery
     /// </summary>
     public partial class MainWindowApp : Window
     {
-        public MainWindowApp(string login)
+        private int userId;
+        private string login;
+        public MainWindowApp(string login, int userId)
         {
             InitializeComponent();
-            LoginName.Text = $" {login}";
+            this.userId = userId;
+            this.login = login;
+            LoginName.Text = $"{login}";
         }
-
         //кнопка скрытия
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -98,6 +102,11 @@ namespace AppProductDelivery
         private void Delivery_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new PageDelivery());
+        }
+
+        private void LoginName_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new PageProfile(userId));
         }
     }
 }

@@ -124,6 +124,56 @@
 					</Style>
 				</Button.Style>
 			</Button>
+			<Button x:Name="Add" Content="Добавить данные" FontFamily="Arial Black" Width="130" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Add_Click" Cursor="Hand" Margin="0,35,0,0">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Background" Value="#2a4a4d"></Setter>
+						<Setter Property="Foreground" Value="#3fb7c4"></Setter>
+						<Setter Property="BorderBrush" Value="Gray"></Setter>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="#9df2fc"></Setter>
+								<Setter Property="Background" Value="#6da6ad"></Setter>
+								<Setter Property="BorderBrush" Value="#6fd3de"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+			<Button x:Name="Delete" Content="Удалить данные" FontFamily="Arial Black" Width="130" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Delete_Click" Cursor="Hand" Margin="0,70,0,0">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Background" Value="#2a4a4d"></Setter>
+						<Setter Property="Foreground" Value="#3fb7c4"></Setter>
+						<Setter Property="BorderBrush" Value="Gray"></Setter>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="#9df2fc"></Setter>
+								<Setter Property="Background" Value="#6da6ad"></Setter>
+								<Setter Property="BorderBrush" Value="#6fd3de"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
 			<Button x:Name="Close" Content="Закрыть" FontFamily="Arial Black" Width="130" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Close_Click"  Cursor="Hand">
 				<Button.Style>
 					<Style TargetType="Button">

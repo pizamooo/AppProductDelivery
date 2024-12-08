@@ -71,5 +71,73 @@ namespace AppProductDelivery
             this.Content = page;
             Content = null;
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRows = DGProducts.SelectedItem as Products;
+
+            if (selectedRows == null)
+            {
+                MessageBox.Show("Выберите строку для добавления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (selectedRows != null && MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}', Цена '{selectedRows.Price}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    DB.Products.Add(selectedRows);
+                    DB.SaveChanges();
+                    DGProducts.ItemsSource = DB.Products.ToList();
+                }
+
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}", "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRows = DGProducts.SelectedItem as Products;
+
+            if (selectedRows == null)
+            {
+                MessageBox.Show("Выберите строку для добавления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (selectedRows != null && MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}', Цена '{selectedRows.Price}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    DB.Products.Remove(selectedRows);
+                    DB.SaveChanges();
+                    DGProducts.ItemsSource = DB.Products.ToList();
+                }
+
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}", "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

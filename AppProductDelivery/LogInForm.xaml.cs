@@ -21,9 +21,11 @@ namespace AppProductDelivery
     /// </summary>
     public partial class LogInForm : Window
     {
+        private int userId;
         public LogInForm()
         {
             InitializeComponent();
+            this.userId = 0;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -115,16 +117,17 @@ namespace AppProductDelivery
                 try
                 {
                     connection.Open();
-                    string query = "SELECT COUNT(1) FROM Employees WHERE Login COLLATE Latin1_General_CS_AS = @login AND Password COLLATE Latin1_General_CS_AS = @password";
+                    string query = "SELECT EmployeeID FROM Employees WHERE Login COLLATE Latin1_General_CS_AS = @login AND Password COLLATE Latin1_General_CS_AS = @password";
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@login", login);
                     cmd.Parameters.AddWithValue("@password", password);
 
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    object result = cmd.ExecuteScalar();
 
-                    if (count == 1)
+                    if (result != null)
                     {
-                        MainWindowApp window = new MainWindowApp(login);
+                        int userId = Convert.ToInt32(result);
+                        MainWindowApp window = new MainWindowApp(login, userId);
                         window.Show();
                         this.Close();
                     }

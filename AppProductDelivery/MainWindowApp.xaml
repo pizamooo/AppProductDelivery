@@ -105,13 +105,24 @@
 					</ToolTip>
 				</Button.ToolTip>
 			</Button>
-			<TextBlock Text="Добро пожаловать!" Name="Greeting" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,-20,0,0" Width="180" Height="20" Grid.ColumnSpan="2" Foreground="Navy"></TextBlock>
-			<TextBlock Name="LoginName" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="43,-20,0,0" Width="250" Height="20" Foreground="Coral" Grid.Column="1"></TextBlock>
+			<TextBlock Text="Добро пожаловать!" Name="Greeting" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,-20,0,0" Width="180" Height="20" Grid.ColumnSpan="2" Foreground="#0f1a63"></TextBlock>
+			<TextBlock Name="LoginName" FontSize="16" FontFamily="Arial Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="43,-20,0,0" Width="150" Height="20" Grid.Column="1" MouseDown="LoginName_MouseDown" Cursor="Hand" TextAlignment="Center" Background="#8aa3d4">
+				<TextBlock.Style>
+					<Style TargetType="TextBlock">
+						<Setter Property="Foreground" Value="#05556e"></Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="Indigo"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</TextBlock.Style>
+			</TextBlock>
 
-			<Label Name="OrderLabel" Content="Заказ" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,20,0,0" Cursor="Hand">
+			<Label Name="OrderLabel" Content="Создать заказ" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24" Margin="0,20,0,0" Cursor="Hand">
 				<Label.Style>
 					<Style TargetType="Label">
-						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
 						<Style.Triggers>
 							<Trigger Property="IsMouseOver" Value="True">
 								<Setter Property="Foreground" Value="Indigo"></Setter>
@@ -123,7 +134,7 @@
 			<Label Name="Suppliers" Content="Поставщики"  HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,70,0,0" Cursor="Hand" MouseDown="Suppliers_MouseDown">
 				<Label.Style>
 					<Style TargetType="Label">
-						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
 						<Style.Triggers>
 							<Trigger Property="IsMouseOver" Value="True">
 								<Setter Property="Foreground" Value="Indigo"></Setter>
@@ -136,7 +147,7 @@
 				<TextBlock TextWrapping="Wrap">Информация о продукции
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
-							<Setter Property="Foreground" Value="DarkCyan"></Setter>
+							<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
 							<Style.Triggers>
 								<Trigger Property="IsMouseOver" Value="True">
 									<Setter Property="Foreground" Value="Indigo"></Setter>
@@ -152,7 +163,7 @@
 			<Label Name="Delivery" Content="Доставка" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,210,0,0" Cursor="Hand" MouseDown="Delivery_MouseDown">
 				<Label.Style>
 					<Style TargetType="Label">
-						<Setter Property="Foreground" Value="DarkCyan"></Setter>
+						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
 						<Style.Triggers>
 							<Trigger Property="IsMouseOver" Value="True">
 								<Setter Property="Foreground" Value="Indigo"></Setter>
@@ -165,7 +176,7 @@
 				</Label.Style>
 			</Label>
 
-			<Border Grid.Column="1" Background="DarkCyan" BorderBrush="DarkCyan" BorderThickness="5" CornerRadius="30" Padding="10">
+			<Border Grid.Column="1" Background="DarkCyan" BorderBrush="DarkCyan" BorderThickness="5" CornerRadius="35" Padding="10" Margin="0,5,0,0">
 				<Grid Grid.Column="1">
 					<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
 				</Grid>

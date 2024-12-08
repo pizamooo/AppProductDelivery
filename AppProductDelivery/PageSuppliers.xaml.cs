@@ -40,7 +40,7 @@ namespace AppProductDelivery
                 return;
             }
 
-            if (MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (selectedRows != null && MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -48,8 +48,6 @@ namespace AppProductDelivery
 
                     DB.Suppliers.AddOrUpdate(selectedRows);
                     DB.SaveChanges();
-
-
                     DGSuppliers.ItemsSource = DB.Suppliers.ToList();
                 }
                 catch (DbEntityValidationException ex)
@@ -73,6 +71,74 @@ namespace AppProductDelivery
             PageSuppliers page = new PageSuppliers();
             this.Content = page;
             Content = null;
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRows = DGSuppliers.SelectedItem as Suppliers;
+
+            if (selectedRows == null)
+            {
+                MessageBox.Show("Выберите строку для добавления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (selectedRows != null && MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Адрес: '{selectedRows.Address}', Контактная информация: '{selectedRows.ContactInfo}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    DB.Suppliers.Add(selectedRows);
+                    DB.SaveChanges();
+                    DGSuppliers.ItemsSource = DB.Suppliers.ToList();
+                }
+
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}", "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRows = DGSuppliers.SelectedItem as Suppliers;
+
+            if (selectedRows == null)
+            {
+                MessageBox.Show("Выберите строку для добавления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (selectedRows != null && MessageBox.Show("Вы действительно хотите обновить данные", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Адрес: '{selectedRows.Address}', Контактная информация: '{selectedRows.ContactInfo}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    DB.Suppliers.Remove(selectedRows);
+                    DB.SaveChanges();
+                    DGSuppliers.ItemsSource = DB.Suppliers.ToList();
+                }
+
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}", "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
         }
     }
 }

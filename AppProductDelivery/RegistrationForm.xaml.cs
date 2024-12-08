@@ -28,10 +28,10 @@ namespace AppProductDelivery
     /// </summary>
     public partial class RegistrationForm : Window
     {
+        private int userId;
         public RegistrationForm()
         {
             InitializeComponent();
-
             StartAnimationInRegistrationForm();
         }
 
@@ -248,10 +248,11 @@ namespace AppProductDelivery
 
             if (isValid)
             {
-                if (RegisterUser(login, password, email))
+                int userId = RegisterUser(login, password, email);
+                if (userId != -1)
                 {
                     ShowCustomMessageBox("Регистрация успешна!");
-                    MainWindowApp window = new MainWindowApp(login);
+                    MainWindowApp window = new MainWindowApp(login, userId);
                     window.Show();
                     this.Close();
                 }
@@ -308,7 +309,7 @@ namespace AppProductDelivery
             this.Close();
         }
 
-        private bool RegisterUser(string login, string password, string email)
+        private int RegisterUser(string login, string password, string email)
         {
             string connectionString="data source=DESKTOP-L92S7VB;initial catalog=ProductDelivery;integrated security=True;";
 
@@ -322,28 +323,26 @@ namespace AppProductDelivery
                     checkUserCmd.Parameters.AddWithValue("@login", login);
                     int userExists = (int)checkUserCmd.ExecuteScalar();
                     if (userExists > 0)
-                        return false;
+                        return -1;
 
-                    SqlCommand insertUserCmd = new SqlCommand("INSERT INTO Employees (login, password, email) VALUES (@login,@password,@email)", connection);
+                    SqlCommand insertUserCmd = new SqlCommand("INSERT INTO Employees (login, password, email) VALUES (@login,@password,@email); SELECT SCOPE_IDENTITY();", connection);
                     insertUserCmd.Parameters.AddWithValue("@login", login);
                     insertUserCmd.Parameters.AddWithValue("@password", password);
                     insertUserCmd.Parameters.AddWithValue("@email", email);
 
 
-                    insertUserCmd.ExecuteNonQuery();
-
-
-                    return true;
+                    int userId = Convert.ToInt32(insertUserCmd.ExecuteScalar());
+                    return userId;
                 }
                 catch (SqlException sqlEx)
                 {
                     ShowCustomMessageBox("SQL error: " + sqlEx.Message);
-                    return false;
+                    return -1;
                 }
                 catch (Exception ex)
                 {
                     ShowCustomMessageBox("Database error: " + ex.Message);
-                    return false;
+                    return -1;
                 }
             }
         }
