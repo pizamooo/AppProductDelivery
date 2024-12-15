@@ -4,21 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1fd9df45aa98429d9388ecd57afb0a83" Name="Diagram1">
+      <Diagram DiagramId="e26ca66e70aa4806bd95b83359aae646" Name="Diagram1">
         <EntityTypeShape EntityType="ProductDeliveryModel.Deliveries" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Employees" Width="1.5" PointX="2.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Inventory" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Orders" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Products" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Shifts" Width="1.5" PointX="5" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.Suppliers" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProductDeliveryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.Employees" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.Orders" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.Products" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.Shifts" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.Suppliers" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProductDeliveryModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="ProductDeliveryModel.FK_Deliveries_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="ProductDeliveryModel.FK_Deliveries_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ProductDeliveryModel.FK_Deliveries_Suppliers" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductDeliveryModel.FK_Inventory_Deliveries" ManuallyRouted="false" />
         <AssociationConnector Association="ProductDeliveryModel.FK_Shifts_Employees" ManuallyRouted="false" />
-        <AssociationConnector Association="ProductDeliveryModel.FK_Inventory_Products" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

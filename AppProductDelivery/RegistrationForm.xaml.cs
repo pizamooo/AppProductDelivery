@@ -29,6 +29,7 @@ namespace AppProductDelivery
     public partial class RegistrationForm : Window
     {
         private int userId;
+        private string userPosition;
         public RegistrationForm()
         {
             InitializeComponent();
@@ -252,7 +253,7 @@ namespace AppProductDelivery
                 if (userId != -1)
                 {
                     ShowCustomMessageBox("Регистрация успешна!");
-                    MainWindowApp window = new MainWindowApp(login, userId);
+                    MainWindowApp window = new MainWindowApp(login, userId, userPosition);
                     window.Show();
                     this.Close();
                 }

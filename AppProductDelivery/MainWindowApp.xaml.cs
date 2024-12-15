@@ -23,13 +23,16 @@ namespace AppProductDelivery
     {
         private int userId;
         private string login;
-        public MainWindowApp(string login, int userId)
+        private string userPosition;
+        public MainWindowApp(string login, int userId, string userPosition)
         {
             InitializeComponent();
             this.userId = userId;
             this.login = login;
+            this.userPosition = userPosition;
             LoginName.Text = $"{login}";
         }
+
         //кнопка скрытия
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -91,22 +94,54 @@ namespace AppProductDelivery
 
         private void Suppliers_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new PageSuppliers());
+            if (!string.IsNullOrEmpty(userPosition) && (userPosition == "Директор" || userPosition == "Заместитель директора" || userPosition == "Бренд-Шеф"))
+            {
+                MainFrame.Navigate(new PageSuppliers());
+            }
+            else
+            {
+                ShowCustomMessageBox("Недостаточно прав для продолжения.");
+            }
         }
 
         private void InfoAboutProducts_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new PageAboutProducts());
+            if (!string.IsNullOrEmpty(userPosition) && (userPosition == "Директор" || userPosition == "Заместитель директора" || userPosition == "Бренд-Шеф"))
+            { 
+                MainFrame.Navigate(new PageAboutProducts());
+            }
+            else
+            {
+                ShowCustomMessageBox("Недостаточно прав для продолжения.");
+            }
         }
 
         private void Delivery_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new PageDelivery());
+            if (!string.IsNullOrEmpty(userPosition) &&(userPosition == "Директор" || userPosition == "Заместитель директора" || userPosition == "Бренд-Шеф"))
+            { 
+                MainFrame.Navigate(new PageDelivery());
+            }
+            else
+            {
+                ShowCustomMessageBox("Недостаточно прав для продолжения.");
+            }
         }
 
         private void LoginName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new PageProfile(userId));
+        }
+
+        private void OrderLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new PageOrder());
+        }
+
+        private void ShowCustomMessageBox(string message)
+        {
+            CustomMessageBox customMessageBox = new CustomMessageBox(message);
+            customMessageBox.ShowDialog();
         }
     }
 }

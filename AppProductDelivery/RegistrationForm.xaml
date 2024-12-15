@@ -107,9 +107,9 @@
 			</Image.RenderTransform>
 		</Image>
 		<TextBlock Name="Greeting" Grid.Row="1" TextWrapping="Wrap" FontFamily="Arial Black" FontSize="21" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5" Opacity="0" Padding="0,0,0,0" Margin="0,0,0,0" TextAlignment="Center" Foreground="#105e57" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-			<Run Text="Добро пожаловать на наш сервис"/>
+			<Run Text="Добро пожаловать на сервис"/>
 			<Run Text="&quot;FamilyTech Solutions&quot;." Foreground="#1b302c"/>
-			<Run Text="Для регистрации введите ваш логин, пароль и email. Если у вас уже есть, то для продолжения нажмите кнопку &quot;Уже есть аккаунт&quot;."/>
+			<Run Text="Для регистрации введите логин, пароль и email сотрудника. Если у уже есть, то для продолжения нажмите кнопку &quot;Есть аккаунт&quot;."/>
 			<TextBlock.RenderTransform>
 				<ScaleTransform ScaleX="0" ScaleY="0"></ScaleTransform>
 			</TextBlock.RenderTransform>
@@ -350,7 +350,7 @@
 				</TextBox.Style>
 			</TextBox>
 			<Label Grid.Row="3" Content="Email:" HorizontalAlignment="Left" VerticalAlignment="Center"  FontFamily="Arial Black" FontSize="27" Margin="173,0,0,0" Foreground="#105e57"/>
-			<Button Name="LogIn" Content="Уже есть аккаунт" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18" Cursor="Hand" Click="LogIn_Click">
+			<Button Name="LogIn" Content="Есть аккаунт" FontFamily="Arial Black" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Margin="0,0,225,20" Width="215" Height="30" FontSize="18" Cursor="Hand" Click="LogIn_Click">
 				<Button.Style>
 					<Style TargetType="Button">
 						<Setter Property="Background" Value="#9ae3ae"></Setter>

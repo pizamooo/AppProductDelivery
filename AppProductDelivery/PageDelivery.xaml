@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AppProductDelivery"
       mc:Ignorable="d" 
-      d:DesignHeight="340" d:DesignWidth="528"
+      d:DesignHeight="315" d:DesignWidth="508"
       Title="PageDelivery">
 
 	<Border Background="DarkCyan" BorderBrush="DarkCyan" BorderThickness="5" CornerRadius="30" Padding="10">
@@ -19,9 +19,10 @@
       FontSize="12"
       Background="LightBlue"
       Foreground="Black"
-      IsReadOnly="False">
+      IsReadOnly="False"
+					  FontFamily="Arial Black">
 				<DataGrid.Columns>
-					<DataGridTemplateColumn Header="Дата доставки" Width="150">
+					<DataGridTemplateColumn Header="Дата заказа" Width="110">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<TextBlock Text="{Binding DeliveryDate}"
@@ -40,7 +41,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellEditingTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn Header="Количество" Width="*">
+					<DataGridTemplateColumn Header="Количество" Width="90">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<TextBlock Text="{Binding Quantity}"
@@ -59,7 +60,7 @@
 							</DataTemplate>
 						</DataGridTemplateColumn.CellEditingTemplate>
 					</DataGridTemplateColumn>
-					<DataGridTemplateColumn Header="Цена за единицу" Width="*">
+					<DataGridTemplateColumn Header="Цена за единицу" Width="130">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<TextBlock Text="{Binding UnitPrice}"

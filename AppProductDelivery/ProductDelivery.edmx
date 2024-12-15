@@ -31,15 +31,6 @@
           <Property Name="MiddleName" Type="varchar" MaxLength="100" />
           <Property Name="Position" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="InventoryID" />
-          </Key>
-          <Property Name="InventoryID" Type="int" Nullable="false" />
-          <Property Name="ProductID" Type="int" />
-          <Property Name="DeliveryID" Type="int" />
-          <Property Name="Quantity" Type="int" />
-        </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -56,7 +47,6 @@
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Category" Type="varchar" MaxLength="100" />
           <Property Name="Unit" Type="varchar" MaxLength="100" />
-          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="Shifts">
           <Key>
@@ -123,30 +113,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inventory_Deliveries">
-          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Deliveries">
-              <PropertyRef Name="DeliveryID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="DeliveryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Shifts_Employees">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
@@ -193,7 +159,6 @@
         <EntityContainer Name="Хранилище ProductDeliveryModelContainer">
           <EntitySet Name="Deliveries" EntityType="Self.Deliveries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
@@ -210,14 +175,6 @@
           <AssociationSet Name="FK_Deliveries_Suppliers" Association="Self.FK_Deliveries_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Deliveries" EntitySet="Deliveries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Deliveries" Association="Self.FK_Inventory_Deliveries">
-            <End Role="Deliveries" EntitySet="Deliveries" />
-            <End Role="Inventory" EntitySet="Inventory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Products" Association="Self.FK_Inventory_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
           <AssociationSet Name="FK_Shifts_Employees" Association="Self.FK_Shifts_Employees">
             <End Role="Employees" EntitySet="Employees" />
@@ -244,7 +201,6 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Deliveries_Orders" FromRole="Deliveries" ToRole="Orders" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Deliveries_Products" FromRole="Deliveries" ToRole="Products" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Deliveries_Suppliers" FromRole="Deliveries" ToRole="Suppliers" />
-          <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Deliveries" FromRole="Deliveries" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -259,17 +215,6 @@
           <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Shifts" Relationship="Self.FK_Shifts_Employees" FromRole="Employees" ToRole="Shifts" />
-        </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="InventoryID" />
-          </Key>
-          <Property Name="InventoryID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" />
-          <Property Name="DeliveryID" Type="Int32" />
-          <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Deliveries" Relationship="Self.FK_Inventory_Deliveries" FromRole="Inventory" ToRole="Deliveries" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Inventory_Products" FromRole="Inventory" ToRole="Products" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -288,9 +233,7 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Unit" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Double" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Deliveries_Products" FromRole="Products" ToRole="Deliveries" />
-          <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Products" FromRole="Products" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Shifts">
           <Key>
@@ -359,18 +302,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inventory_Deliveries">
-          <End Role="Deliveries" Type="Self.Deliveries" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Deliveries">
-              <PropertyRef Name="DeliveryID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="DeliveryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Shifts_Employees">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
@@ -383,22 +314,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inventory_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProductDeliveryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Deliveries" EntityType="Self.Deliveries" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="Inventory" EntityType="Self.Inventory" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Shifts" EntityType="Self.Shifts" />
@@ -416,17 +334,9 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Deliveries" EntitySet="Deliveries" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Deliveries" Association="Self.FK_Inventory_Deliveries">
-            <End Role="Deliveries" EntitySet="Deliveries" />
-            <End Role="Inventory" EntitySet="Inventory" />
-          </AssociationSet>
           <AssociationSet Name="FK_Shifts_Employees" Association="Self.FK_Shifts_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Shifts" EntitySet="Shifts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Products" Association="Self.FK_Inventory_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -504,16 +414,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inventory">
-            <EntityTypeMapping TypeName="ProductDeliveryModel.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
-                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="ProductDeliveryModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
@@ -530,7 +430,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

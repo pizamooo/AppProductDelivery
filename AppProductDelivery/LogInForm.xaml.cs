@@ -22,10 +22,12 @@ namespace AppProductDelivery
     public partial class LogInForm : Window
     {
         private int userId;
+        private string userPosition;
         public LogInForm()
         {
             InitializeComponent();
             this.userId = 0;
+            this.userPosition = string.Empty;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -117,23 +119,26 @@ namespace AppProductDelivery
                 try
                 {
                     connection.Open();
-                    string query = "SELECT EmployeeID FROM Employees WHERE Login COLLATE Latin1_General_CS_AS = @login AND Password COLLATE Latin1_General_CS_AS = @password";
+                    string query = "SELECT EmployeeID, Position FROM Employees WHERE Login COLLATE Latin1_General_CS_AS = @login AND Password COLLATE Latin1_General_CS_AS = @password";
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@login", login);
                     cmd.Parameters.AddWithValue("@password", password);
 
-                    object result = cmd.ExecuteScalar();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int userId = reader.GetInt32(reader.GetOrdinal("EmployeeID"));
+                            string userPosition = reader.IsDBNull(reader.GetOrdinal("Position")) ? null : reader.GetString(reader.GetOrdinal("Position"));
 
-                    if (result != null)
-                    {
-                        int userId = Convert.ToInt32(result);
-                        MainWindowApp window = new MainWindowApp(login, userId);
-                        window.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        ShowCustomMessageBox("Неверный логин или пароль.");
+                            MainWindowApp window = new MainWindowApp(login, userId, userPosition);
+                            window.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            ShowCustomMessageBox("Неверный логин или пароль.");
+                        }
                     }
                 }
 

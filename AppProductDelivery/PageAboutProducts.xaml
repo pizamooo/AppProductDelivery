@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AppProductDelivery"
       mc:Ignorable="d" 
-      d:DesignHeight="340" d:DesignWidth="528"
+      d:DesignHeight="315" d:DesignWidth="508"
       Title="PageAboutProducts" ShowsNavigationUI="False" Background="Transparent">
 	<Border Background="DarkCyan" BorderBrush="DarkCyan" BorderThickness="5" CornerRadius="30" Padding="10">
 		<Grid>
@@ -18,9 +18,10 @@
           FontSize="12"
           Background="LightBlue"
           Foreground="Black"
-          IsReadOnly="False">
+          IsReadOnly="False"
+					  FontFamily="Arial Black">
 				<DataGrid.Columns>
-					<DataGridTemplateColumn Header="Название" Width="130">
+					<DataGridTemplateColumn Header="Название" Width="*">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<TextBlock Text="{Binding Name}"
@@ -74,26 +75,6 @@
                              TextWrapping="Wrap"
                              VerticalAlignment="Center"
                              HorizontalAlignment="Left" />
-							</DataTemplate>
-						</DataGridTemplateColumn.CellEditingTemplate>
-					</DataGridTemplateColumn>
-					<DataGridTemplateColumn Header="Цена" Width="*">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Price}"
-   TextWrapping="Wrap"
-   TextTrimming="CharacterEllipsis"
-   VerticalAlignment="Center"
-   HorizontalAlignment="Left" />
-
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-						<DataGridTemplateColumn.CellEditingTemplate>
-							<DataTemplate>
-								<TextBox Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
- TextWrapping="Wrap"
- VerticalAlignment="Center"
- HorizontalAlignment="Left" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellEditingTemplate>
 					</DataGridTemplateColumn>

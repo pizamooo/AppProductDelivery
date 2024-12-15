@@ -29,7 +29,6 @@ namespace AppProductDelivery
     
         public virtual DbSet<Deliveries> Deliveries { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Inventory> Inventory { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Shifts> Shifts { get; set; }

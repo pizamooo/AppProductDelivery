@@ -18,18 +18,14 @@ namespace AppProductDelivery
         public Products()
         {
             this.Deliveries = new HashSet<Deliveries>();
-            this.Inventory = new HashSet<Inventory>();
         }
     
         public int ProductID { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
         public string Unit { get; set; }
-        public Nullable<double> Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Deliveries> Deliveries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

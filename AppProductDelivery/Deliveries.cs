@@ -14,12 +14,6 @@ namespace AppProductDelivery
     
     public partial class Deliveries
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Deliveries()
-        {
-            this.Inventory = new HashSet<Inventory>();
-        }
-    
         public int DeliveryID { get; set; }
         public int SupplierID { get; set; }
         public Nullable<int> ProductID { get; set; }
@@ -32,7 +26,5 @@ namespace AppProductDelivery
         public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
         public virtual Suppliers Suppliers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

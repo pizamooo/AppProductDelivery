@@ -42,7 +42,7 @@ namespace AppProductDelivery
             {
                 try
                 {
-                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}', Цена '{selectedRows.Price}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     DB.Products.AddOrUpdate(selectedRows);
                     DB.SaveChanges();
@@ -86,7 +86,7 @@ namespace AppProductDelivery
             {
                 try
                 {
-                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}', Цена '{selectedRows.Price}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     DB.Products.Add(selectedRows);
                     DB.SaveChanges();
@@ -120,7 +120,7 @@ namespace AppProductDelivery
             {
                 try
                 {
-                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}', Цена '{selectedRows.Price}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Наименование: '{selectedRows.Name}', Категория: '{selectedRows.Category}', Единица продукта: '{selectedRows.Unit}'", "Отладочное сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     DB.Products.Remove(selectedRows);
                     DB.SaveChanges();
