@@ -17,8 +17,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml;
+
 
 namespace AppProductDelivery
 {
@@ -143,15 +145,11 @@ namespace AppProductDelivery
                 mainPart.Document = new Document();
                 Body body = mainPart.Document.AppendChild(new Body());
 
+                AddTitle(body, "Накладная");
                 AddParagraph(body, "Дата: " + date);
-                AddParagraph(body, "Продукт: " + products);
-                AddParagraph(body, "Категория: " + category);
-                AddParagraph(body, "Единица продукта: " + unit);
-                AddParagraph(body, "Цена: " + price);
-                AddParagraph(body, "Поставщик: " + suppliers);
-                AddParagraph(body, "Цена поставки: " + supplyPrice);
-                AddParagraph(body, "Количество поставленного товара: " + quantity);
-                AddParagraph(body, "Общая стоимость: " + totalCost);
+
+                AddTable(body, new string[] { "Продукт", "Категория", "Единица", "Цена", "Поставщик", "Цена поставки", "Количество", "Общая стоимость" },
+                 new string[][] { new string[] { products, category, unit, price, suppliers, supplyPrice, quantity, totalCost } });
 
                 mainPart.Document.Save();
             }
@@ -159,10 +157,107 @@ namespace AppProductDelivery
             ShowCustomMessageBox("Документ успешно сохранен!");
         }
 
+        private void AddTitle(Body body, string text)
+        {
+            DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new Text(text)
+            {
+                Space = SpaceProcessingModeValues.Preserve
+            })
+            {
+                RunProperties = new RunProperties(
+                    new RunFonts() { Ascii = "Arial", HighAnsi = "Arial", ComplexScript = "Arial" },
+                    new FontSize() { Val = "36" },
+                    new DocumentFormat.OpenXml.Wordprocessing.Bold(),
+                    new DocumentFormat.OpenXml.Wordprocessing.Color() { Val = "000000" } // Черный цвет текста
+                )
+            })
+            {
+                ParagraphProperties = new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                )
+            };
+            body.AppendChild(paragraph);
+        }
+
         private void AddParagraph(Body body, string text)
         {
-            DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Text(text)));
+            DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph = new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new Text(text)
+            {
+                Space = SpaceProcessingModeValues.Preserve
+            })
+            {
+                RunProperties = new RunProperties(
+                    new RunFonts() { Ascii = "Arial", HighAnsi = "Arial", ComplexScript = "Arial" },
+                    new FontSize() { Val = "26" },
+                    new DocumentFormat.OpenXml.Wordprocessing.Bold(),
+                    new DocumentFormat.OpenXml.Wordprocessing.Color() { Val = "000000" } // Черный цвет текста
+                )
+            })
+            {
+                ParagraphProperties = new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                )
+            };
             body.AppendChild(paragraph);
+        }
+
+        private void AddTable(Body body, string[] headers, string[][] rows)
+        {
+            DocumentFormat.OpenXml.Wordprocessing.Table table = new DocumentFormat.OpenXml.Wordprocessing.Table();
+
+            TableProperties tableProperties = new TableProperties(
+                new TableBorders(
+                    new TopBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                    new BottomBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                    new LeftBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                    new RightBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                    new InsideHorizontalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                    new InsideVerticalBorder() { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 }
+                ),
+                new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Dxa }
+            );
+
+            table.AppendChild(tableProperties);
+
+            DocumentFormat.OpenXml.Wordprocessing.TableRow headerRow = new DocumentFormat.OpenXml.Wordprocessing.TableRow();
+            foreach (var header in headers)
+            {
+                DocumentFormat.OpenXml.Wordprocessing.TableCell cell = new DocumentFormat.OpenXml.Wordprocessing.TableCell(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new Text(header)
+                {
+                    Space = SpaceProcessingModeValues.Preserve
+                })
+                {
+                    RunProperties = new RunProperties(
+                        new RunFonts() { Ascii = "Arial", HighAnsi = "Arial", ComplexScript = "Arial" },
+                        new FontSize() { Val = "20" },
+                        new DocumentFormat.OpenXml.Wordprocessing.Bold()
+                    )
+                }));
+                headerRow.AppendChild(cell);
+            }
+            table.AppendChild(headerRow);
+
+            foreach (var row in rows)
+            {
+                DocumentFormat.OpenXml.Wordprocessing.TableRow dataRow = new DocumentFormat.OpenXml.Wordprocessing.TableRow();
+                foreach (var cellText in row)
+                {
+                    DocumentFormat.OpenXml.Wordprocessing.TableCell cell = new DocumentFormat.OpenXml.Wordprocessing.TableCell(new DocumentFormat.OpenXml.Wordprocessing.Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new Text(cellText)
+                    {
+                        Space = SpaceProcessingModeValues.Preserve
+                    })
+                    {
+                        RunProperties = new RunProperties(
+                            new RunFonts() { Ascii = "Arial", HighAnsi = "Arial", ComplexScript = "Arial" },
+                            new FontSize() { Val = "16" }
+                        )
+                    }));
+                    dataRow.AppendChild(cell);
+                }
+                table.AppendChild(dataRow);
+            }
+
+            body.AppendChild(table);
         }
         private void ShowCustomMessageBox(string message)
         {

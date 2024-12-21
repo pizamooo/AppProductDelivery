@@ -48,16 +48,6 @@
           <Property Name="Category" Type="varchar" MaxLength="100" />
           <Property Name="Unit" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="Shifts">
-          <Key>
-            <PropertyRef Name="ShiftID" />
-          </Key>
-          <Property Name="ShiftID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" />
-          <Property Name="ShiftDate" Type="date" />
-          <Property Name="StartTime" Type="time" Precision="7" />
-          <Property Name="EndTime" Type="time" Precision="7" />
-        </EntityType>
         <EntityType Name="Suppliers">
           <Key>
             <PropertyRef Name="SupplierID" />
@@ -113,18 +103,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shifts_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Shifts">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -161,7 +139,6 @@
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Deliveries_Orders" Association="Self.FK_Deliveries_Orders">
@@ -175,10 +152,6 @@
           <AssociationSet Name="FK_Deliveries_Suppliers" Association="Self.FK_Deliveries_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Deliveries" EntitySet="Deliveries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shifts_Employees" Association="Self.FK_Shifts_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Shifts" EntitySet="Shifts" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -214,7 +187,6 @@
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Shifts" Relationship="Self.FK_Shifts_Employees" FromRole="Employees" ToRole="Shifts" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -234,17 +206,6 @@
           <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Unit" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Deliveries" Relationship="Self.FK_Deliveries_Products" FromRole="Products" ToRole="Deliveries" />
-        </EntityType>
-        <EntityType Name="Shifts">
-          <Key>
-            <PropertyRef Name="ShiftID" />
-          </Key>
-          <Property Name="ShiftID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeID" Type="Int32" />
-          <Property Name="ShiftDate" Type="DateTime" Precision="0" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Shifts_Employees" FromRole="Shifts" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -302,24 +263,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shifts_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Shifts">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProductDeliveryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Deliveries" EntityType="Self.Deliveries" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Products" EntityType="Self.Products" />
-          <EntitySet Name="Shifts" EntityType="Self.Shifts" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_Deliveries_Orders" Association="Self.FK_Deliveries_Orders">
@@ -333,10 +281,6 @@
           <AssociationSet Name="FK_Deliveries_Suppliers" Association="Self.FK_Deliveries_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Deliveries" EntitySet="Deliveries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shifts_Employees" Association="Self.FK_Shifts_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Shifts" EntitySet="Shifts" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -430,17 +374,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Shifts">
-            <EntityTypeMapping TypeName="ProductDeliveryModel.Shifts">
-              <MappingFragment StoreEntitySet="Shifts">
-                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="ShiftDate" ColumnName="ShiftDate" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,12 +14,6 @@ namespace AppProductDelivery
     
     public partial class Employees
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
-        {
-            this.Shifts = new HashSet<Shifts>();
-        }
-    
         public int EmployeeID { get; set; }
         public string login { get; set; }
         public string password { get; set; }
@@ -28,8 +22,5 @@ namespace AppProductDelivery
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public string Position { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Shifts> Shifts { get; set; }
     }
 }

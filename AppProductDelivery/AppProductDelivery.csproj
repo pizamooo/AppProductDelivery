@@ -172,9 +172,9 @@
       <DependentUpon>ProductDelivery.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductDelivery.cs">
-      <DependentUpon>ProductDelivery.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductDelivery.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -186,9 +186,6 @@
     </Compile>
     <Compile Include="RegistrationForm.xaml.cs">
       <DependentUpon>RegistrationForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shifts.cs">
-      <DependentUpon>ProductDelivery.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ProductDelivery.tt</DependentUpon>
@@ -311,8 +308,8 @@
     </Content>
     <Content Include="ProductDelivery.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ProductDelivery.cs</LastGenOutput>
       <DependentUpon>ProductDelivery.edmx</DependentUpon>
+      <LastGenOutput>ProductDelivery.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
