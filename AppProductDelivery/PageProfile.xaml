@@ -13,19 +13,21 @@
 			<Label FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63">
 				<TextBlock Text="Профиль пользователя" TextDecorations="Underline"></TextBlock>
 			</Label>
-			<Label Content="Логин:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="35,50,0,0"></Label>
-			<Label Content="Пароль:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="20,80,0,0"></Label>
-			<Label Content="Фамилия:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="0,110,0,0"></Label>
-			<Label Content="Имя:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="50,140,0,0"></Label>
-			<Label Content="Отчество:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="0,170,0,0"></Label>
-			<Label Content="Email:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="37,200,0,0"></Label>
+			<Label Content="Логин:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="41,45,0,0"></Label>
+			<Label Content="Пароль:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="23,75,0,0"></Label>
+			<Label Content="Фамилия:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="5,105,0,0"></Label>
+			<Label Content="Имя:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="57,135,0,0"></Label>
+			<Label Content="Отчество:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="7,165,0,0"></Label>
+			<Label Content="Email:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="44,195,0,0"></Label>
+			<Label Content="Должность:" FontFamily="Arial Black" FontSize="18" Foreground="#0f1a63" Margin="-15,225,0,0"></Label>
 
-			<TextBox x:Name="LoginTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,55,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
-			<TextBox x:Name="PasswordTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,85,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
-			<TextBox x:Name="LastNameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,115,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
-			<TextBox x:Name="NameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,145,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
-			<TextBox x:Name="MiddleNameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,175,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
-			<TextBox x:Name="EmailTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,205,0,0" FontFamily="Arial Black" MaxLength="100"></TextBox>
+			<TextBox x:Name="LoginTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,50,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="PasswordTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,80,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="LastNameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,110,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="NameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,140,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="MiddleNameTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,170,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="EmailTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,200,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black"></TextBox>
+			<TextBox x:Name="EmployeeTextBox" Width="200" Height="20" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,230,0,0" FontFamily="Arial Black" MaxLength="100" BorderBrush="Black" IsReadOnly="True"></TextBox>
 
 			<Button x:Name="Close" Content="Закрыть" FontFamily="Arial Black" Width="130" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Close_Click"  Cursor="Hand">
 				<Button.Style>

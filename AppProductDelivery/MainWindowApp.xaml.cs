@@ -143,5 +143,10 @@ namespace AppProductDelivery
             CustomMessageBox customMessageBox = new CustomMessageBox(message);
             customMessageBox.ShowDialog();
         }
+
+        private void Journal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

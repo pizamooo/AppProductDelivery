@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,7 +42,7 @@ namespace AppProductDelivery
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var command = new SqlCommand("SELECT login, password, email, Name, LastName, MiddleName FROM Employees WHERE EmployeeID = @UserId", connection);
+                var command = new SqlCommand("SELECT login, password, email, Name, LastName, MiddleName, Position FROM Employees WHERE EmployeeID = @UserId", connection);
                 command.Parameters.AddWithValue("@UserId", userId);
                 using (var reader = command.ExecuteReader())
                 {
@@ -53,6 +54,10 @@ namespace AppProductDelivery
                         LastNameTextBox.Text = reader["LastName"].ToString();
                         NameTextBox.Text = reader["Name"].ToString();
                         MiddleNameTextBox.Text = reader["MiddleName"].ToString();
+                        EmployeeTextBox.Text = reader["Position"].ToString();
+
+                        var position = reader["Position"];
+                        EmployeeTextBox.Text = position == DBNull.Value ? "Сотрудник" : position.ToString();
                     }
                     else
                     {
@@ -66,16 +71,60 @@ namespace AppProductDelivery
         {
             string connectionString = "data source=DESKTOP-L92S7VB;initial catalog=ProductDelivery;integrated security=True;";
 
-            try 
+            bool isValid = true;
+
+            string login = LoginTextBox.Text;
+            string password = PasswordTextBox.Text;
+            string email = EmailTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(login) || login.Length < 5 || !IsValidLogin(login))
+            {
+                ShowCustomMessageBox("Логин должен содержать не менее 5 символов и не содержать специальных символов.");
+                LoginTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                isValid = false;
+            }
+            else
+            {
+                LoginTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+            }
+
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 5)
+            {
+                ShowCustomMessageBox("Логин должен содержать не менее 5 символов.");
+                PasswordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                isValid = false;
+            }
+            else
+            {
+                PasswordTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+            }
+
+            if (!IsValidEmail(email))
+            {
+                ShowCustomMessageBox("Некорректный формат email.");
+                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                isValid = false;
+            }
+            else
+            {
+                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
+            }
+
+            if (!isValid)
+            {
+                return;
+            }
+
+            try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     var command = new SqlCommand("UPDATE Employees SET login = @login, password = @password, email = @email, LastName = @LastName, Name = @Name, MiddleName = @MiddleName WHERE EmployeeID = @UserId", connection);
                     command.Parameters.AddWithValue("@UserId", userId);
-                    command.Parameters.AddWithValue("@login", LoginTextBox.Text);
-                    command.Parameters.AddWithValue("@email", EmailTextBox.Text);
-                    command.Parameters.AddWithValue("@password", PasswordTextBox.Text);
+                    command.Parameters.AddWithValue("@login", login);
+                    command.Parameters.AddWithValue("@email", email);
+                    command.Parameters.AddWithValue("@password", password);
                     command.Parameters.AddWithValue("@LastName", LastNameTextBox.Text);
                     command.Parameters.AddWithValue("@Name", NameTextBox.Text);
                     command.Parameters.AddWithValue("@MiddleName", MiddleNameTextBox.Text);
@@ -88,12 +137,38 @@ namespace AppProductDelivery
             {
                 ShowCustomMessageBox("Ошибка базы данных: " + sqlEx.Message);
             }
-
             catch (Exception ex)
             {
                 ShowCustomMessageBox("Ошибка: " + ex.Message);
             }
         }
+    
+        private bool IsValidLogin(string login)
+        {
+            string pattern = @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]";
+            return !Regex.IsMatch(login, pattern);
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                string specialCharPattern = @"[!#$%^&*()_+=\[{\]};:<>|/?,-]";
+                if (Regex.IsMatch(email, specialCharPattern))
+                    return false;
+
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                return Regex.IsMatch(email, emailPattern);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         private void ShowCustomMessageBox(string message)
         {
             CustomMessageBox customMessageBox = new CustomMessageBox(message);

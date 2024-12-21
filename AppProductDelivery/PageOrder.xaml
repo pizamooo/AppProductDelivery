@@ -54,11 +54,11 @@
 			<ComboBox Name="ComboBoxProducts" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,45,0,0" FontFamily="Arial Black"></ComboBox>
 			<ComboBox Name="ComboBoxCategory" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,75,0,0" FontFamily="Arial Black"></ComboBox>
 			<ComboBox Name="ComboBoxUnit" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,105,0,0" FontFamily="Arial Black"></ComboBox>
-			<TextBox Name="TextBoxPrice" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,135,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting"></TextBox>
+			<TextBox Name="TextBoxPrice" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,135,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting" BorderBrush="Black"></TextBox>
 			<ComboBox Name="ComboBoxSupplier" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,165,0,0" FontFamily="Arial Black"></ComboBox>
-			<TextBox Name="TextBoxSupplyPrice" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,195,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting"></TextBox>
-			<TextBox Name="TextBoxQuantity" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,228,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting"></TextBox>
-			<TextBox Name="TextBoxTotalCost" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,265,0,0" FontFamily="Arial Black" FontSize="16" IsReadOnly="True"></TextBox>
+			<TextBox Name="TextBoxSupplyPrice" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,195,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting" BorderBrush="Black"></TextBox>
+			<TextBox Name="TextBoxQuantity" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,228,0,0" FontFamily="Arial Black" FontSize="16" TextChanged="TextBox_TextChanged" PreviewTextInput="TextBox_PreviewTextInput" DataObject.Pasting="TextBox_Pasting" BorderBrush="Black"></TextBox>
+			<TextBox Name="TextBoxTotalCost" Width="200" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,265,0,0" FontFamily="Arial Black" FontSize="16" IsReadOnly="True" BorderBrush="Black"></TextBox>
 			
 			<Button x:Name="Save" Width="130" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Сохранить" FontFamily="Arial Black" Cursor="Hand" Margin="0,0,0,0" Click="Save_Click">
 				<Button.Style>

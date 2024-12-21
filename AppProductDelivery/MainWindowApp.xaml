@@ -118,8 +118,40 @@
 					</Style>
 				</TextBlock.Style>
 			</TextBlock>
+			<Button Name="Journal" Grid.Column="1" Content="Журнал" HorizontalAlignment="Left" Margin="200,-20,0,0" VerticalAlignment="Top" FontFamily="Arial Black" Width="100" Cursor="Hand" Height="20" Click="Journal_Click">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Background" Value="#2a4a4d"></Setter>
+						<Setter Property="Foreground" Value="#3fb7c4"></Setter>
+						<Setter Property="BorderBrush" Value="Gray"></Setter>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Foreground" Value="#9df2fc"></Setter>
+								<Setter Property="Background" Value="#6da6ad"></Setter>
+								<Setter Property="BorderBrush" Value="#6fd3de"></Setter>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+				<Button.ToolTip>
+					<ToolTip Style="{StaticResource CustomToolTipStyle}">
+						<TextBlock TextWrapping="Wrap" Width="130">
+				Журнал действий
+						</TextBlock>
+					</ToolTip>
+				</Button.ToolTip>
+			</Button>
 
-			<Label Name="OrderLabel" Content="Создать заказ" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24" Margin="0,60,0,0" Cursor="Hand" MouseDown="OrderLabel_MouseDown">
+			<Label Name="OrderLabel" Content="Создать заказ" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="24" Margin="0,60,0,0" Cursor="Hand" Background="#8aa3d4" MouseDown="OrderLabel_MouseDown">
 				<Label.Style>
 					<Style TargetType="Label">
 						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
@@ -131,7 +163,7 @@
 					</Style>
 				</Label.Style>
 			</Label>
-			<Label Name="Suppliers" Content="Поставщики"  HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,120,0,0" Cursor="Hand" MouseDown="Suppliers_MouseDown">
+			<Label Name="Suppliers" Content="Поставщики"  HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,120,0,0" Cursor="Hand" Background="#8aa3d4" MouseDown="Suppliers_MouseDown">
 				<Label.Style>
 					<Style TargetType="Label">
 						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
@@ -143,7 +175,7 @@
 					</Style>
 				</Label.Style>
 			</Label>
-			<Label Name="InfoAboutProducts" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,180,0,0" Cursor="Hand" MouseDown="InfoAboutProducts_MouseDown">
+			<Label Name="InfoAboutProducts" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,180,0,0" Cursor="Hand" Background="#8aa3d4" MouseDown="InfoAboutProducts_MouseDown">
 				<TextBlock TextWrapping="Wrap">Продукция
 					<TextBlock.Style>
 						<Style TargetType="TextBlock">
@@ -160,7 +192,7 @@
 					</TextBlock.Style>
 				</TextBlock>
 			</Label>
-			<Label Name="Delivery" Content="Доставка" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,250,0,0" Cursor="Hand" MouseDown="Delivery_MouseDown">
+			<Label Name="Delivery" Content="Доставка" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="25" Margin="0,240,0,0" Cursor="Hand" Background="#8aa3d4" MouseDown="Delivery_MouseDown">
 				<Label.Style>
 					<Style TargetType="Label">
 						<Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
